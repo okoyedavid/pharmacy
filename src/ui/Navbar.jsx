@@ -22,11 +22,11 @@ function Navbar() {
 
           <NavLink
             className={`${styles.navItem} ${
-              location.pathname === "/dashboard/login" ? styles.login : ""
+              location.pathname === "/dashboard/user" ? styles.login : ""
             }`}
-            to="dashboard/login"
+            to={location.pathname === "/login" ? "signup" : "login"}
           >
-            Login
+            {location.pathname === "/login" ? "Signup" : "Login"}
           </NavLink>
         </ul>
       </nav>

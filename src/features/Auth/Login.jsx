@@ -4,6 +4,7 @@ import Input from "../../ui/Input";
 import styles from "../../modules/Login.module.css";
 import axios from "axios";
 import validateLogin from "../../services/validation";
+import toast from "react-hot-toast";
 
 function Login() {
   const formErrors = useActionData();
@@ -47,17 +48,20 @@ export async function action({ request }) {
   if (!name) errors.name = "please fill in your name";
   if (!password) errors.password = "please fill in your password";
 
-  if (Object.keys(errors).length > 0) return errors;
-
+  if (Object.keys(errors).length > 0) {
+    toast.error("Please fill in the appropriate fields");
+    return errors;
+  }
   try {
     const response = await axios.get("https://pharm-six.vercel.app/api/user");
     const value = validateLogin(response.data, name, password);
-    if (value) return redirect("/user");
+    if (value) return redirect("/dashboard/user");
     else {
       errors.message = "invalid password or username please try again";
     }
   } catch (errors) {
     console.log(errors);
+    toast.error("we encountered an error logging you in please try again");
   }
 
   return errors;

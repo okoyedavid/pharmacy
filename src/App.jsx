@@ -8,6 +8,7 @@ import Login, {
   loader as actionLoader,
   action as LoginForm,
 } from "./features/Auth/Login";
+import SignUp, { action as signupAction } from "./features/Auth/SignUp";
 import User, { loader as loadUser } from "./features/User/User";
 
 function App() {
@@ -22,27 +23,33 @@ function App() {
           loader: AboutLoader,
           errorElement: <Error />,
         },
-
         {
-          path: "dashBoard",
-          element: <Dashboard />,
+          path: "login",
+          element: <Login />,
+          action: LoginForm,
+          loader: actionLoader,
           errorElement: <Error />,
-          children: [
-            {
-              path: "login",
-              element: <Login />,
-              action: LoginForm,
-              loader: actionLoader,
-              errorElement: <Error />,
-            },
-            {
-              path: "user",
-              element: <User />,
+        },
+        {
+          path: "signup",
+          action: signupAction,
+          element: <SignUp />,
+          errorElement: <Error />,
+        },
+      ],
+    },
 
-              loader: loadUser,
-              errorElement: <Error />,
-            },
-          ],
+    {
+      path: "dashBoard",
+      element: <Dashboard />,
+      errorElement: <Error />,
+      children: [
+        {
+          path: "user",
+          element: <User />,
+
+          loader: loadUser,
+          errorElement: <Error />,
         },
       ],
     },
