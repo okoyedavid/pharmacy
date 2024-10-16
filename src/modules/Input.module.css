@@ -1,0 +1,42 @@
+.label {
+  font-size: 0.8rem;
+  margin: 3px;
+}
+
+.input {
+  height: 30px;
+  background-clip: padding-box;
+  border: 1px solid var(--blues-clr-1);
+  border-radius: 4px;
+  width: 100%;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.input:focus {
+  border: none;
+  outline: 2px solid var(--blue-clr-0);
+  border-color: var(--blue-clr-0);
+  box-shadow: 0 0 8px rgba(191, 219, 254, 1);
+}
+
+.input ::placeholder {
+  font-family: var(--font-ubuntu);
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  margin-top: 3px;
+  font-size: 0.8rem;
+  padding: 3px;
+  border-radius: 5px;
+  color: black;
+  font-style: normal;
+  font-weight: 600;
+  padding-left: 10px;
+  background-color: #f87171;
+}

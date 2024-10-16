@@ -1,0 +1,42 @@
+.login {
+  position: relative;
+  height: 100dvh;
+  font-family: var(--font-ubuntu);
+  font-style: italic;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background {
+  background-image: url("/bg.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  position: fixed;
+  transform: translatey(-15%);
+  height: 100%;
+  width: 100%;
+  z-index: -3;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: black;
+  opacity: 0.2;
+  z-index: -2;
+}
+
+@media (min-width: 550px) {
+  .login form {
+    width: 500px;
+  }
+}
+
+@media (max-width: 550px) {
+  .login form {
+    width: 80%;
+  }
+}

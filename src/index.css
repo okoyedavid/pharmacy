@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+:root {
+  --white-clr-0: #fff;
+  --white-clr-1: #f5f5f5;
+  --white-clr-2: #e5e5e5;
+  --text-clr-0: #fafaf9;
+
+  --blue-clr-0: #bfdbfe;
+  --blue-clr-1: #60a5fa;
+  --blue-clr-2: #2563eb;
+  --blue-clr-3: #1e40af;
+
+  --cta-clr-0: #bae6fd;
+  --cta-clr-1: #38bdf8;
+  --cta-clr-2: #0ea5e9;
+
+  --font-manrope: "Manrope", sans-serif;
+  --font-ubuntu: "Ubuntu", sans-serif;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  font-family: var(--font-manrope);
+  font-optical-sizing: auto;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}

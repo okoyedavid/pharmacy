@@ -1,0 +1,79 @@
+.address {
+  background-color: var(--white-clr-0);
+  padding: 20px;
+}
+
+.header > h1 {
+  font-family: var(--font-ubuntu);
+  font-style: oblique;
+  margin: 0;
+}
+
+.header > p {
+  padding: 0;
+  margin: 0;
+  font-size: 0.7rem;
+  font-style: italic;
+}
+
+.image {
+  height: 350px;
+  width: 350px;
+}
+
+.content {
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.addressText {
+  margin: 0;
+  font-size: clamp(0.875rem, 1vw + 0.5rem, 1.125rem);
+}
+
+.footer {
+  padding: 20px;
+}
+
+.footer p {
+  font-weight: 900;
+  margin: 3px 0;
+  font-size: 0.7rem;
+}
+
+@media (min-width: 621px) and (max-width: 850px) {
+  .image {
+    float: left;
+    margin-right: 30px;
+    margin-bottom: 20px;
+  }
+
+  .content {
+    display: block;
+  }
+}
+
+@media (max-width: 620px) {
+  .image {
+    margin: 0;
+    max-width: 450px;
+    width: 100%;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 420px) {
+  .image {
+    margin: 0;
+    height: 300px;
+    max-width: 450px;
+    width: 100%;
+  }
+}

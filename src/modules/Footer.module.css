@@ -1,0 +1,30 @@
+.footer {
+  background-color: var(--white-clr-1);
+  color: var(--blue-clr-2);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 5px;
+  text-align: center;
+}
+.footer_text {
+  text-align: center;
+  margin: 0;
+}
+
+.contact {
+  padding: 0;
+  max-width: 400px;
+  display: flex;
+  margin: 10px auto;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+.social_img {
+  height: 35px;
+  width: 35px;
+}
