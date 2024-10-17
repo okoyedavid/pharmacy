@@ -7,7 +7,7 @@ function Navbar() {
 
   return (
     <>
-      <nav>
+      <nav className={styles.nav}>
         <NavLink to="/">
           <img src={logo} className={styles.navImg} />
         </NavLink>

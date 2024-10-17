@@ -22,9 +22,9 @@ function SignUp() {
   const FetchUser = useFetch();
 
   useEffect(() => {
-    if (formErrors?.success) {
+    if (formErrors?.success && formErrors?.id) {
       toast.success("Account created successfully");
-      FetchUser(formErrors?.id);
+      FetchUser(formErrors.id);
       setTimeout(() => {
         navigate("/dashboard/user");
       }, 3000);
