@@ -1,0 +1,53 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(228, 212, 212, 0.1);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+  transition: all 0.5s;
+}
+
+.container {
+  position: relative;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--white-clr-0);
+  border-radius: 3px;
+}
+
+.btn {
+  border: none;
+  background: none;
+  padding: 0;
+  border-radius: 4px;
+  top: 0.4rem;
+  right: 0.4rem;
+  position: absolute;
+  height: 1.8rem;
+  margin: 2px;
+  width: auto;
+  background-color: var(--white-clr-1);
+}
+
+.btn > svg {
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 0;
+  /* Sometimes we need both */
+  /* fill: var(--color-grey-500);
+    stroke: var(--color-grey-500); */
+  color: var(--cta-clr-2);
+}
+
+.content {
+  margin: 20px;
+  padding: 20px;
+}

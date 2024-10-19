@@ -7,12 +7,10 @@ function useFetch() {
   const dispatch = useDispatch();
 
   async function FetchUser(id) {
-    console.log(id);
     try {
       const res = await axios.get(
         `https://pharm-six.vercel.app/api/user?id=${id}`
       );
-
       dispatch(getUser(res.data));
     } catch (error) {
       console.log(error);

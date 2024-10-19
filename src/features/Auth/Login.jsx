@@ -22,16 +22,20 @@ function Login() {
           name="name"
           placeholder={"Please input your username"}
           error={formErrors?.name}
+          register={""}
         />
         <Input
           label={"Password"}
           type="password"
           name="password"
+          register={""}
           placeholder={"please input your password"}
           error={formErrors?.password || formErrors?.message}
         />
 
-        <Button>{isLoading ? "signing you in....." : "Login"}</Button>
+        <Button type={"primary"} variation={"medium"}>
+          {isLoading ? "signing you in....." : "Login"}
+        </Button>
       </Form>
     </div>
   );

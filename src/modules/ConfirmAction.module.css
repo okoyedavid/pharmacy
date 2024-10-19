@@ -1,0 +1,18 @@
+h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.header {
+  padding: 10px;
+}
+
+.logout {
+  font-size: 1rem;
+}
+
+.header > span {
+  font-size: 0.7rem;
+  color: red;
+}

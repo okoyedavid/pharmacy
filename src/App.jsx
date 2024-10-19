@@ -9,7 +9,11 @@ import Login, {
   action as LoginForm,
 } from "./features/Auth/Login";
 import SignUp, { action as signupAction } from "./features/Auth/SignUp";
-import User, { loader as loadUser } from "./features/User/User";
+import User, { loader as loadUser } from "./features/dashboard/User";
+import Edit, { loader as editLoader } from "./features/dashboard/Edit";
+import Payment from "./features/dashboard/Payments";
+import Subjects from "./features/dashboard/Subjects";
+import Results from "./features/dashboard/Results";
 
 function App() {
   const router = createBrowserRouter([
@@ -49,6 +53,27 @@ function App() {
           element: <User />,
 
           loader: loadUser,
+          errorElement: <Error />,
+        },
+        {
+          path: "edit",
+          element: <Edit />,
+          errorElement: <Error />,
+          loader: editLoader,
+        },
+        {
+          path: "payments",
+          element: <Payment />,
+          errorElement: <Error />,
+        },
+        {
+          path: "results",
+          element: <Results />,
+          errorElement: <Error />,
+        },
+        {
+          path: "subjects",
+          element: <Subjects />,
           errorElement: <Error />,
         },
       ],

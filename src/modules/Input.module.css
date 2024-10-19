@@ -1,6 +1,7 @@
 .label {
   font-size: 0.8rem;
   margin: 3px;
+  color: black;
 }
 
 .input {
@@ -9,6 +10,7 @@
   border: 1px solid var(--blues-clr-1);
   border-radius: 4px;
   width: 100%;
+  outline: 1px solid var(--blue-clr-0);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -38,5 +40,5 @@
   font-style: normal;
   font-weight: 600;
   padding-left: 10px;
-  background-color: #f87171;
+  background-color: var(--red-clr-1);
 }
