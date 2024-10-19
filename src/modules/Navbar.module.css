@@ -4,7 +4,7 @@
   width: 100%;
   display: flex;
   z-index: 3;
-  color: var(--blue-clr-3);
+  color: var(--blue-clr-1);
   background-color: var(--white-clr-1);
   justify-content: space-between;
   padding: 10px;
@@ -29,13 +29,25 @@
   font-size: clamp(0.8rem, 1vw + 0.5rem, 1.5rem);
 }
 
-.navItem {
-  text-decoration: none;
-  color: var(--grey-clr);
+.email {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.login {
-  display: none;
+.email > svg {
+  width: 1.2rem;
+  color: var(--blue-clr-1);
+}
+
+.navItem > a,
+.navItem > button > a {
+  text-decoration: none;
+  color: var(--blue-clr-1);
+}
+
+.navItem > button > a {
+  color: var(--white-clr-2);
 }
 
 @media (max-width: 450px) {

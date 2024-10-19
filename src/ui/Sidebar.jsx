@@ -1,5 +1,5 @@
 import Nav from "../features/dashboard/Nav";
-import Logo from "../Pages/Logo";
+import Logo from "../ui/Logo";
 import styles from "../modules/Sidebar.module.css";
 
 function Sidebar() {

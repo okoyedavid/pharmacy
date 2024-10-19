@@ -24,7 +24,7 @@ function SignUp() {
   useEffect(() => {
     if (formErrors?.success && formErrors?.id) {
       toast.success("Account created successfully");
-      FetchUser(formErrors.id);
+      FetchUser(formErrors?.id);
       setTimeout(() => {
         navigate("/dashboard/user");
       }, 3000);
@@ -40,12 +40,14 @@ function SignUp() {
           label={"username"}
           type="text"
           name="name"
+          register={""}
           placeholder={"Please input your username"}
           error={formErrors?.name}
         />
         <Input
           label={"Email"}
           type="email"
+          register={""}
           name="Email"
           placeholder={"Please input your Email"}
           error={formErrors?.email}
@@ -54,6 +56,7 @@ function SignUp() {
           label={"Class"}
           type="number"
           name="class"
+          register={""}
           placeholder={"Which level are you ?"}
           error={formErrors?.class}
         />
@@ -61,11 +64,12 @@ function SignUp() {
           label={"Password"}
           type="password"
           name="password"
+          register={""}
           placeholder={"please input your password"}
           error={formErrors?.password || formErrors?.message}
         />
 
-        <Button>
+        <Button type={"primary"} variation={"medium"}>
           {isLoading ? "creating your account....." : "Create Account"}
         </Button>
       </Form>

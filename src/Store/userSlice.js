@@ -12,7 +12,7 @@ const user = createSlice({
     getUser(state, action) {
       state.userInfo = action.payload.userInfo;
       state.schoolInfo = action.payload.schoolInfo;
-      localStorage.setItem("state", JSON.stringify(state));
+      localStorage.setItem("state", JSON.stringify(action.payload));
     },
     logOut(state) {
       state.schoolInfo = [];

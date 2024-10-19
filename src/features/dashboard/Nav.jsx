@@ -1,26 +1,10 @@
-import {
-  HiBookOpen,
-  HiCreditCard,
-  HiLogout,
-  HiPencilAlt,
-  HiUser,
-} from "react-icons/hi";
+import { HiBookOpen, HiCreditCard, HiPencilAlt, HiUser } from "react-icons/hi";
 import styles from "../../modules/Nav.module.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaChartArea } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { logOut } from "../../Store/userSlice";
+import Logout from "../../ui/Logout";
 
 function Nav() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  function handleLogout() {
-    dispatch(logOut());
-
-    navigate("/");
-  }
-
   return (
     <nav className={styles.nav}>
       <ul className={styles.ul}>
@@ -58,9 +42,7 @@ function Nav() {
         </li>
 
         <li>
-          <button onClick={handleLogout} className={styles.btn}>
-            <HiLogout /> <span>Logout</span>
-          </button>
+          <Logout styles={styles} />
         </li>
       </ul>
     </nav>

@@ -82,4 +82,5 @@ h2 {
   width: 150px;
   height: 150px;
   border-radius: 6px;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1);
 }

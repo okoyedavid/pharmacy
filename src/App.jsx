@@ -10,7 +10,7 @@ import Login, {
 } from "./features/Auth/Login";
 import SignUp, { action as signupAction } from "./features/Auth/SignUp";
 import User, { loader as loadUser } from "./features/dashboard/User";
-import Edit from "./features/dashboard/Edit";
+import Edit, { loader as editLoader } from "./features/dashboard/Edit";
 import Payment from "./features/dashboard/Payments";
 import Subjects from "./features/dashboard/Subjects";
 import Results from "./features/dashboard/Results";
@@ -59,6 +59,7 @@ function App() {
           path: "edit",
           element: <Edit />,
           errorElement: <Error />,
+          loader: editLoader,
         },
         {
           path: "payments",

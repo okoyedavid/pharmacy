@@ -1,0 +1,67 @@
+.edit {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 1rem;
+  height: 100%;
+  align-self: center;
+}
+
+.form > div > input {
+  height: 40px;
+  padding: 10px;
+}
+
+.form > div > label {
+  font-size: clamp(12px, 2vw, 15px);
+  padding: 3px;
+  font-style: oblique;
+  margin: 0;
+}
+
+.form > div:nth-child(3) {
+  grid-column: -1 / 1;
+}
+
+.form > div:nth-child(4) {
+  grid-column: -1 / 1;
+}
+
+.form > div:nth-child(5) {
+  grid-column: -1 / 1;
+}
+
+.form > div:nth-child(6) > input {
+  padding: 0;
+  margin-top: 5px;
+}
+
+.form > div > .input::-webkit-file-upload-button {
+  outline: none;
+  border: none;
+  height: 100%;
+  padding: 10px;
+  font-weight: 300;
+  border-radius: 6px;
+  font-family: var(--font-ubuntu);
+
+  background-color: var(--cta-clr-1);
+}
+
+.form > button {
+  padding: 0;
+  height: 50px;
+  grid-column: -1 /1;
+}
+
+.error {
+  color: red;
+  font-style: italic;
+}
