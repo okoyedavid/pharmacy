@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useLoaderData } from "react-router-dom";
 import AboutHead from "../features/About/AboutHead";
 import FacultyList from "../features/About/FacultyList";
@@ -17,10 +16,3 @@ function About() {
 }
 
 export default About;
-
-export async function loader() {
-  const response = await axios.get("https://pharm-six.vercel.app/api/data");
-  const data = await response.data;
-
-  return data;
-}

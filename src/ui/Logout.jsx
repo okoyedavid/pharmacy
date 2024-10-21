@@ -12,7 +12,8 @@ function Logout({ styles }) {
 
   function onLogout() {
     dispatch(logOut());
-
+    localStorage.removeItem("state");
+    localStorage.removeItem("semester");
     navigate("/");
   }
 

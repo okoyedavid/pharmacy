@@ -1,3 +1,12 @@
 .aside {
   padding-top: 20px;
+  width: 100%;
+  position: relative;
+}
+
+.aside > div {
+  position: sticky;
+  top: 20px;
+  left: 0;
+  width: 100%;
 }

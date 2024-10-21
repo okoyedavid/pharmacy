@@ -1,5 +1,5 @@
 import styles from "../../modules/User.module.css";
-import { redirect, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import avatar from "/user_images/egemba.jpg";
 
 function User() {
@@ -39,11 +39,3 @@ function User() {
 }
 
 export default User;
-
-export function loader() {
-  if (!localStorage.getItem("state")) return redirect("/login");
-
-  const state = localStorage.getItem("state");
-
-  return JSON.parse(state);
-}
