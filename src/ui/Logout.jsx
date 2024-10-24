@@ -1,19 +1,14 @@
 import { HiLogout } from "react-icons/hi";
 import Modal from "./Modal";
-
-import { useDispatch } from "react-redux";
+import { logout as logoutApi } from "../services/ApiAuth";
 import { useNavigate } from "react-router-dom";
-import { logOut } from "../Store/userSlice";
 import ConfirmAction from "./ConfirmAction";
 
 function Logout({ styles }) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function onLogout() {
-    dispatch(logOut());
-    localStorage.removeItem("state");
-    localStorage.removeItem("semester");
+    logoutApi();
     navigate("/");
   }
 

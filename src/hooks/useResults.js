@@ -1,13 +1,14 @@
 import { useDispatch } from "react-redux";
 import { getSemester } from "../Store/userSlice";
-import { fetchSubjects } from "../services/loaders";
 import { supabase } from "../services/supabase";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
+import useFetchSubjects from "./useFetchSubjects";
 
 function useResults() {
   const [courses, setCourses] = useState([]);
   const [gpa, setGpa] = useState(null);
+  const { subjects } = useFetchSubjects();
 
   const dispatch = useDispatch();
   const regex = /^[a-fA-F]+$/;
@@ -24,12 +25,16 @@ function useResults() {
     const { name, value } = e.target;
     const grade = value.toUpperCase();
 
+    console.log(name, value);
+
     if (value && regex.test(value)) {
       const { data, error } = await supabase
-        .from("200lvl 1st semester subjects")
+        .from("courses")
         .update({ grade })
         .eq("code", name)
         .select("*");
+
+      console.log(data);
 
       getSession(data[0].semester);
 
@@ -94,7 +99,7 @@ function useResults() {
 
   async function getSession(semester) {
     setGpa(null);
-    const subjects = await fetchSubjects();
+
     const filteredSubjects = subjects.filter(
       (item) => item.semester === semester
     );

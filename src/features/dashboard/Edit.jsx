@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import styles from "../../modules/Edit.module.css";
 import { useLoaderData } from "react-router-dom";
 import Button from "../../ui/Button";
-import Input from "../../ui/Input";
+import Input from "../../ui/InputArea";
 
 function Edit() {
   const values = useLoaderData();

@@ -1,12 +1,15 @@
 import { memo } from "react";
-import { useLoaderData } from "react-router-dom";
 import styles from "../../modules/Subjects.module.css";
+import useFetchSubjects from "../../hooks/useFetchSubjects";
+import SpinnerFullPage from "../../ui/SpinnerFullPage";
 
 function Subjects() {
-  const data = useLoaderData();
+  const { subjects, fetchingSubjects } = useFetchSubjects();
 
-  const firstSemester = data.filter((item) => item.semester === "first");
-  const secondSemester = data.filter((item) => item.semester === "second");
+  const firstSemester = subjects?.filter((item) => item.semester === "first");
+  const secondSemester = subjects?.filter((item) => item.semester === "second");
+
+  if (fetchingSubjects) return <SpinnerFullPage />;
 
   return (
     <>

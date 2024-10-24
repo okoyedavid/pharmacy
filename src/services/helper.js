@@ -1,62 +1,37 @@
-import axios from "axios";
-import store from "../Store/Store";
-import { getUser } from "../Store/userSlice";
-import { userUrl } from "./api";
+import toast from "react-hot-toast";
+import { supabase } from "./supabase";
 
-export function createUser(formData) {
-  const name = formData.get("name");
-  const password = formData.get("password");
-  const level = formData.get("class");
-  const email = formData.get("Email");
-  const errors = {};
+export async function fetchSubjects(level) {
+  try {
+    const { data: subjects, error } = await supabase
+      .from("courses")
+      .select("*")
+      .eq("level", level)
+      .order("code", { ascending: true });
 
-  const body = {
-    id: Date.now().toString(),
-    status: "student",
-    userInfo: {
-      name,
-      password,
-      email,
-    },
+    if (error) {
+      throw error;
+    }
 
-    schoolInfo: {
-      level,
-      carryOvers: {
-        subjects: [],
-      },
-      AdmissionYear: "",
-      currentGP: "",
-    },
+    return subjects;
+  } catch (err) {
+    console.error(err);
+    toast.error("We encountered an error fetching the subjects");
+    return null;
+  }
+}
+
+export async function loadEditValues() {
+  const state = JSON.parse(localStorage.getItem("state"));
+  const { userInfo, schoolInfo } = state;
+
+  const values = {
+    name: userInfo.name,
+    email: userInfo.email,
+    password: userInfo.password,
+    class: schoolInfo.level,
+    quote: "if lovebite they bring am abeg ",
   };
 
-  if (!name) errors.name = "please fill in your name";
-  if (!password) errors.password = "please fill in your password";
-  if (!level) errors.class = "please fill in your class";
-  if (!email) errors.email = "please fill in your Email";
-
-  return { body, errors };
-}
-
-export async function AddUser(body) {
-  try {
-    await axios.post(userUrl, body);
-    return true;
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
-}
-
-export function validateUser(data, name, password) {
-  const authenticatedUser = Object.values(data.dataBase).find(
-    (user) => user.userInfo.name === name && user.userInfo.password === password
-  );
-
-  if (authenticatedUser) {
-    store.dispatch(getUser(authenticatedUser));
-    localStorage.setItem("state", JSON.stringify(authenticatedUser));
-    return true;
-  } else {
-    return false;
-  }
+  return values;
 }

@@ -1,77 +1,81 @@
-import {
-  Form,
-  useActionData,
-  useNavigate,
-  useNavigation,
-} from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { emailRegex, passwordRegex } from "../../utils/constants";
 import Button from "../../ui/Button";
-import Input from "../../ui/Input";
-import styles from "../../modules/Login.module.css";
-import toast from "react-hot-toast";
-import { useEffect } from "react";
-import useFetch from "../../hooks/useFetch";
+import InputArea from "../../ui/InputArea";
+import Form from "../../ui/Form";
+import useAuth from "./useAuth";
 
 function SignUp() {
-  const formErrors = useActionData();
-  const navigation = useNavigation();
-  const navigate = useNavigate();
-  const isLoading = navigation.state === "submitting";
+  const { register, handleSubmit, formState, reset } = useForm();
+  const { signUp, isCreatingUSer } = useAuth();
+  const { errors, isSubmitting } = formState;
 
-  const FetchUser = useFetch();
-
-  useEffect(() => {
-    if (formErrors?.success && formErrors?.id) {
-      toast.success("Account created successfully");
-      FetchUser(formErrors?.id);
-      setTimeout(() => {
-        navigate("/dashboard/user");
-      }, 3000);
-    }
-  }, [formErrors, navigate, FetchUser]);
+  function onSubmit(data) {
+    signUp(data, { onSettled: () => reset() });
+  }
 
   return (
-    <div className={styles.login}>
-      <div className={styles.background}></div>
-      <div className={styles.overlay}></div>
-      <Form method="POST">
-        <Input
-          label={"username"}
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <InputArea label={"Full Name"} error={errors?.name?.message}>
+        <input
           type="text"
-          name="name"
-          register={""}
-          placeholder={"Please input your username"}
-          error={formErrors?.name}
+          id="name"
+          placeholder={"Please input your full name"}
+          {...register("name", { required: "This field is required" })}
         />
-        <Input
-          label={"Email"}
+      </InputArea>
+      <InputArea label={"Email"} error={errors?.email?.message}>
+        <input
           type="email"
-          register={""}
-          name="Email"
+          id="email"
           placeholder={"Please input your Email"}
-          error={formErrors?.email}
+          {...register("email", {
+            required: "This field is required",
+            pattern: {
+              value: emailRegex,
+              message: "Please input a valid email",
+            },
+          })}
         />
-        <Input
-          label={"Class"}
-          type="number"
-          name="class"
-          register={""}
-          placeholder={"Which level are you ?"}
-          error={formErrors?.class}
-        />
-        <Input
-          label={"Password"}
-          type="password"
-          name="password"
-          register={""}
-          placeholder={"please input your password"}
-          error={formErrors?.password || formErrors?.message}
-        />
+      </InputArea>
+      <InputArea label="Level" error={errors?.level?.message}>
+        <select
+          id="level"
+          {...register("level", { required: "Please select your level" })}
+        >
+          <option value="">Select your level</option>
+          <option value="100">100 level</option>
+          <option value="200">200 level</option>
+          <option value="300">300 level</option>
+          <option value="400">400 level</option>
+          <option value="500">500 level</option>
+        </select>
+      </InputArea>
 
-        <Button type={"primary"} variation={"medium"}>
-          {isLoading ? "creating your account....." : "Create Account"}
-        </Button>
-      </Form>
-    </div>
+      <InputArea label={"Password"} error={errors?.password?.message}>
+        <input
+          type="password"
+          id="password"
+          placeholder={"Please input your password"}
+          {...register("password", {
+            required: "This field is required",
+            pattern: {
+              value: passwordRegex,
+              message:
+                "Password must be a minimum of 8 characters, one uppercase letter, a number, and contain a special character",
+            },
+          })}
+        />
+      </InputArea>
+
+      <Button
+        type={"primary"}
+        variation={"medium"}
+        disabled={isCreatingUSer || isSubmitting}
+      >
+        {isCreatingUSer ? "Creating your account..." : "Create Account"}
+      </Button>
+    </Form>
   );
 }
 
