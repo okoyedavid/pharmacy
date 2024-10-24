@@ -1,14 +1,12 @@
 import { useForm } from "react-hook-form";
 import styles from "../../modules/Edit.module.css";
-import { useLoaderData } from "react-router-dom";
 import Button from "../../ui/Button";
-import Input from "../../ui/InputArea";
+import InputArea from "../../ui/InputArea";
+import { emailRegex } from "../../utils/constants";
 
 function Edit() {
-  const values = useLoaderData();
-
   const { register, formState, handleSubmit } = useForm({
-    defaultValues: values,
+    defaultValues: [],
   });
   const { errors } = formState;
 
@@ -23,67 +21,72 @@ function Edit() {
       <h2>Edit profile</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <Input
-          name={"name"}
-          placeholder={"input your name"}
-          label={"Name"}
-          type={"text"}
-          id="name"
-          register={register}
-          rules={{ required: "This field is required" }}
-          error={errors?.name?.message}
-        />
+        <InputArea label={"Name"} error={errors?.name?.message}>
+          <input
+            name={"name"}
+            placeholder={"input your name"}
+            type={"text"}
+            id="name"
+            {...register("name", { required: "This field is required" })}
+          />
+        </InputArea>
 
-        <Input
-          name={"class"}
-          placeholder={"which level are you in"}
-          label={"Level"}
-          type={"number"}
-          id="class"
-          register={register}
-          rules={{ required: "This field is required" }}
-          error={errors?.class?.message}
-        />
+        <InputArea error={errors?.class?.message} label={"Level"}>
+          <input
+            name={"class"}
+            placeholder={"which level are you in"}
+            type={"number"}
+            id="class"
+            {...register("class", { required: "This field is required" })}
+          />
+        </InputArea>
 
-        <Input
-          label={"Email Address"}
-          name={"email"}
-          type={"email"}
-          id="email"
-          placeholder={"fill in your email address"}
-          register={register}
-          rules={{ required: "This field is required" }}
-          error={errors?.email?.message}
-        />
+        <InputArea error={errors?.email?.message} label={"Email Address"}>
+          <input
+            name={"email"}
+            type={"email"}
+            id="email"
+            placeholder={"fill in your email address"}
+            {...register("email", {
+              required: "This field is required",
+              pattern: {
+                value: emailRegex,
+                message: "please input a valid email",
+              },
+            })}
+          />
+        </InputArea>
 
-        <Input
-          name={"password"}
-          label={"Your password"}
-          placeholder={"input your password"}
-          type={"text"}
-          id="password"
-          register={register}
-          rules={{ required: "This field is required" }}
-          error={errors?.password?.message}
-        />
+        <InputArea error={errors?.password?.message} label={"Your password"}>
+          <input
+            name={"password"}
+            placeholder={"input your password"}
+            type={"text"}
+            id="password"
+            {...register("password", { required: "This field is required" })}
+          />
+        </InputArea>
 
-        <Input
-          name={"quote"}
-          placeholder={"favorite quote"}
-          label={"quote"}
-          type={"text"}
-          id="quote"
-          register={register}
-        />
+        <InputArea label={"quote"}>
+          <input
+            name={"quote"}
+            placeholder={"favorite quote"}
+            type={"text"}
+            id="quote"
+            {...register("quote")}
+          />
+        </InputArea>
 
-        <Input
-          className={styles.input}
-          label={"New profile photo"}
-          type={"file"}
-          id="image"
-          name="image"
-          register={register}
-        />
+        <InputArea>
+          <input
+            className={styles.input}
+            label={"New profile photo"}
+            type={"file"}
+            id="image"
+            name="image"
+            {...register("image")}
+          />
+        </InputArea>
 
         <Button type={"primary"} variation={"small"}>
           Submit{" "}

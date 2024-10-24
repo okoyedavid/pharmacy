@@ -1,10 +1,10 @@
+import { GetUserInfo } from "../../hooks/getUserInfo";
 import styles from "../../modules/User.module.css";
-import { useLoaderData } from "react-router-dom";
 import avatar from "/user_images/egemba.jpg";
 
 function User() {
-  const user = useLoaderData();
-  const profile = user.schoolInfo;
+  const data = GetUserInfo();
+  const user = data.user.user_metadata;
 
   return (
     <>
@@ -14,8 +14,8 @@ function User() {
           <img src={avatar} className={styles.Profile_image} />
         </div>
         <div className={styles.headerText}>
-          <h1 className={styles.header}>{user.userInfo.name}</h1>
-          <h2>class: {profile.level} level</h2>
+          <h1 className={styles.header}>{user?.name}</h1>
+          <h2>class: {user.level} level</h2>
         </div>
       </header>
       <div className={styles.division}>
@@ -24,9 +24,9 @@ function User() {
         <hr className={styles.line} />
       </div>
       <section>
-        {profile?.currentGP && (
+        {user?.currentGP && (
           <h4 className={styles.gradePoint}>
-            Current Grade point average: {profile.currentGP}
+            Current Grade point average: {user.currentGP}
           </h4>
         )}
 
