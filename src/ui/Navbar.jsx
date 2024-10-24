@@ -3,7 +3,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import logo from "/logo.jpg";
 import Button from "./Button";
 import { HiMail } from "react-icons/hi";
-
 function Navbar() {
   const { pathname } = useLocation();
   const state = localStorage.getItem("state");
@@ -27,11 +26,11 @@ function Navbar() {
 
           <li className={styles.navItem}>
             {!state ? (
-              <Button type={"primary"} variation={"small"}>
-                <NavLink to={pathname === "/login" ? "signup" : "login"}>
+              <NavLink to={pathname === "/login" ? "signup" : "login"}>
+                <Button type={"primary"} variation={"medium"}>
                   {pathname === "/login" ? "signup" : "login"}
-                </NavLink>
-              </Button>
+                </Button>
+              </NavLink>
             ) : (
               <NavLink to={"/dashboard/user"}>Profile Page</NavLink>
             )}

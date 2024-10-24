@@ -1,7 +1,7 @@
-import Input from "../../ui/Input";
 import useResults from "../../hooks/useResults";
 import Button from "../../ui/Button";
 import styles from "../../modules/Results.module.css";
+import InputArea from "../../ui/InputArea";
 
 function Results() {
   const { updateResult, getSession, courses, getGradePoint, gpa } =
@@ -12,7 +12,11 @@ function Results() {
       <h1>Results</h1>
 
       <div>
-        <select value={""} onChange={(e) => getSession(e.target.value)}>
+        <select
+          className={styles.select}
+          value={""}
+          onChange={(e) => getSession(e.target.value)}
+        >
           <option value=""> select current semester </option>
           <option value="first"> First Semester </option>
           <option value="second"> Second Semester </option>
@@ -36,12 +40,13 @@ function Results() {
                     <td>{item.title}</td>
                     <td>{item.code}</td>
                     <td>
-                      <Input
-                        name={item.code}
-                        register={""}
-                        onBlur={updateResult}
-                        defaultValue={item.grade.toUpperCase()}
-                      />
+                      <InputArea>
+                        <input
+                          name={item.code}
+                          onBlur={updateResult}
+                          defaultValue={item.grade.toUpperCase()}
+                        />
+                      </InputArea>
                     </td>
                   </tr>
                 ))}

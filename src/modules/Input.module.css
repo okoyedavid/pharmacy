@@ -4,7 +4,8 @@
   color: black;
 }
 
-.input {
+.container > input,
+select {
   height: 30px;
   background-clip: padding-box;
   border: 1px solid var(--blues-clr-1);
@@ -14,14 +15,16 @@
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.input:focus {
+.container > input:focus,
+select:focus {
   border: none;
   outline: 2px solid var(--blue-clr-0);
   border-color: var(--blue-clr-0);
   box-shadow: 0 0 8px rgba(191, 219, 254, 1);
 }
 
-.input ::placeholder {
+.container > input::placeholder,
+select::placeholder {
   font-family: var(--font-ubuntu);
 }
 

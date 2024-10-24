@@ -13,22 +13,28 @@ function Footer() {
 
         <ul className={styles.contact}>
           <li>
-            <a target="#" href="https://www.instagram.com/">
+            <a
+              target="#"
+              href="https://www.instagram.com/pans__esut?igsh=MWZmY2E3ZTNhdXRqag=="
+            >
               <img className={styles.social_img} src={instagram} />
             </a>
           </li>
           <li>
-            <a target="#" href="https://www.twitter.com/">
+            <a target="#" href="https://x.com/pansesut">
               <img className={styles.social_img} src={twitter} />
             </a>
           </li>
           <li>
-            <a target="#" href="https://www.tiktok.com/">
+            <a target="#" href="https://www.tiktok.com/@pans.esut3">
               <img className={styles.social_img} src={tiktok} />
             </a>
           </li>
           <li>
-            <a target="#" href="https://www.facebook.com/">
+            <a
+              target="#"
+              href="https://www.facebook.com/share/v/NanjoDwsMKAWovSL/?mibextid=WC7FNe"
+            >
               <img className={styles.social_img} src={facebook} />
             </a>
           </li>

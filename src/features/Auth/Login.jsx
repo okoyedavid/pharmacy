@@ -1,40 +1,51 @@
-import { Form, useActionData, useNavigation } from "react-router-dom";
 import Button from "../../ui/Button";
-import Input from "../../ui/Input";
-import styles from "../../modules/Login.module.css";
+import InputArea from "../../ui/InputArea";
+import Form from "../../ui/Form";
+import { useForm } from "react-hook-form";
+import { emailRegex } from "../../utils/constants";
+import useAuth from "./useAuth";
 
 function Login() {
-  const formErrors = useActionData();
-  const navigation = useNavigation();
-  const isLoading = navigation.state === "submitting";
+  const { register, formState, reset, handleSubmit } = useForm();
+  const { LoginUSer, isLogginIn } = useAuth();
+  const { errors } = formState;
+
+  function onSubmit(data) {
+    LoginUSer(data, { onSettled: () => reset() });
+  }
 
   return (
-    <div className={styles.login}>
-      <div className={styles.background}></div>
-      <div className={styles.overlay}></div>
-      <Form method="POST">
-        <Input
-          label={"username"}
-          type="text"
-          name="name"
-          placeholder={"Please input your username"}
-          error={formErrors?.name}
-          register={""}
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <InputArea label={"Email"} error={errors?.email?.message}>
+        <input
+          type="email"
+          id="email"
+          placeholder={"Please input your Email"}
+          {...register("email", {
+            required: "This field is required",
+            pattern: {
+              value: emailRegex,
+              message: "Please input a valid email",
+            },
+          })}
         />
-        <Input
-          label={"Password"}
+      </InputArea>
+
+      <InputArea label={"Password"} error={errors?.password?.message}>
+        <input
           type="password"
           name="password"
-          register={""}
           placeholder={"please input your password"}
-          error={formErrors?.password || formErrors?.message}
+          {...register("password", {
+            required: "This field is required",
+          })}
         />
+      </InputArea>
 
-        <Button type={"primary"} variation={"medium"}>
-          {isLoading ? "signing you in....." : "Login"}
-        </Button>
-      </Form>
-    </div>
+      <Button type={"primary"} variation={"medium"}>
+        {isLogginIn ? "creating your account....." : "Create Account"}
+      </Button>
+    </Form>
   );
 }
 

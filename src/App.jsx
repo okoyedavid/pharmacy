@@ -1,16 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
-import {
-  fetchSubjects,
-  fetchUser,
-  fetchAbout,
-  checkLogin,
-  loadEditValues,
-} from "./services/loaders";
-import { validateLogin, SignupUser } from "./services/Action";
 import SpinnerFullPage from "./ui/SpinnerFullPage";
 import { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ProtectedRoutes from "./ui/ProtectedRoutes";
 
 const MainLayout = lazy(() => import("./ui/MainLayout"));
 const Home = lazy(() => import("./Pages/Home"));
@@ -26,6 +21,11 @@ const Subjects = lazy(() => import("./features/dashboard/Subjects"));
 const Results = lazy(() => import("./features/dashboard/Results"));
 
 function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      staleTime: 0,
+    },
+  });
   const router = createBrowserRouter([
     {
       element: <MainLayout />,
@@ -34,19 +34,15 @@ function App() {
         {
           path: "/about",
           element: <About />,
-          loader: fetchAbout,
           errorElement: <Error />,
         },
         {
           path: "login",
           element: <Login />,
-          action: validateLogin,
-          loader: checkLogin,
           errorElement: <Error />,
         },
         {
           path: "signup",
-          action: SignupUser,
           element: <SignUp />,
           errorElement: <Error />,
         },
@@ -55,21 +51,22 @@ function App() {
 
     {
       path: "dashboard",
-      element: <Dashboard />,
+      element: (
+        <ProtectedRoutes>
+          <Dashboard />
+        </ProtectedRoutes>
+      ),
       errorElement: <Error />,
       children: [
         {
           path: "user",
           element: <User />,
-
-          loader: fetchUser,
           errorElement: <Error />,
         },
         {
           path: "edit",
           element: <Edit />,
           errorElement: <Error />,
-          loader: loadEditValues,
         },
         {
           path: "payments",
@@ -85,7 +82,6 @@ function App() {
           path: "subjects",
           element: <Subjects />,
           errorElement: <Error />,
-          loader: fetchSubjects,
         },
       ],
     },
@@ -93,27 +89,28 @@ function App() {
 
   return (
     <Suspense fallback={<SpinnerFullPage />}>
-      <RouterProvider router={router}></RouterProvider>
-
-      <Toaster
-        position="top-center"
-        gutter={12}
-        containerStyle={{ margin: "8px" }}
-        toastOptions={{
-          success: { duration: 3000 },
-          error: {
-            duration: 5000,
-          },
-
-          style: {
-            fontSize: "16px",
-            maxWidth: "500px",
-            padding: "16px 24px",
-            backgroundColor: `var(--white-clr-1)`,
-            color: `var(--blue-clr-2)`,
-          },
-        }}
-      />
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <RouterProvider router={router}></RouterProvider>
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: { duration: 3000 },
+            error: {
+              duration: 5000,
+            },
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              backgroundColor: `var(--white-clr-1)`,
+              color: `var(--blue-clr-2)`,
+            },
+          }}
+        />
+      </QueryClientProvider>
     </Suspense>
   );
 }
