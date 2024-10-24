@@ -18,7 +18,7 @@ function HomeContent() {
   return (
     <div className={styles.home}>
       <div className={styles.overlay}></div>
-      <div className={styles.img}></div>
+      <img className={styles.img} src={parm} alt="Sliding image" />
 
       <div className={styles.homeContent}>
         <h1>Welcome to the Faculty of Pharmaceutical Sciences, ESUT</h1>
