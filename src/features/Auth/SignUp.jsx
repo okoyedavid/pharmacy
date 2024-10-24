@@ -1,6 +1,5 @@
 import {
   Form,
-  redirect,
   useActionData,
   useNavigate,
   useNavigation,
@@ -10,8 +9,7 @@ import Input from "../../ui/Input";
 import styles from "../../modules/Login.module.css";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
-import useFetch from "./useFetch";
-import { AddUser, createUser } from "../../services/helper";
+import useFetch from "../../hooks/useFetch";
 
 function SignUp() {
   const formErrors = useActionData();
@@ -78,23 +76,3 @@ function SignUp() {
 }
 
 export default SignUp;
-
-export async function action({ request }) {
-  const formData = await request.formData();
-  const { body, errors } = createUser(formData);
-  if (Object.keys(errors).length > 0) {
-    toast.error("please fill in all fields");
-    return errors;
-  }
-
-  const value = AddUser(body);
-  if (value) return { success: true, id: body.id };
-
-  return errors;
-}
-
-export function loader() {
-  if (localStorage.getItem("state")) return redirect("/dashboard/user");
-
-  return null;
-}

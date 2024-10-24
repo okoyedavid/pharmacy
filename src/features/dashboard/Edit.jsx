@@ -94,18 +94,3 @@ function Edit() {
 }
 
 export default Edit;
-
-export async function loader() {
-  const state = JSON.parse(localStorage.getItem("state"));
-  const { userInfo, schoolInfo } = state;
-
-  const values = {
-    name: userInfo.name,
-    email: userInfo.email,
-    password: userInfo.password,
-    class: schoolInfo.level,
-    quote: "if lovebite they bring am abeg ",
-  };
-
-  return values;
-}

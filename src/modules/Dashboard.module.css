@@ -1,16 +1,31 @@
 .div {
   display: grid;
   grid-template-columns: 18rem 1fr;
-
   min-height: 100vh;
-
   background-color: var(--white-clr-1);
+  position: relative;
 }
 
 .main {
-  padding: 1rem;
+  padding: 0 1rem;
   margin: 0.5rem;
   background-color: var(--white-clr-0);
   box-shadow: -16px 16px 14px -3px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  position: sticky;
+  height: 100vh;
+  overflow: scroll;
+}
+
+/* setting the height and the overflow to scroll caused extra scrollbars so i disabled them below */
+.main::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar */
+}
+
+.main {
+  scrollbar-width: none;
+}
+
+.main {
+  -ms-overflow-style: none;
 }

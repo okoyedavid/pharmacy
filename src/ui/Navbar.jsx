@@ -7,7 +7,6 @@ import { HiMail } from "react-icons/hi";
 function Navbar() {
   const { pathname } = useLocation();
   const state = localStorage.getItem("state");
-  console.log(state);
 
   return (
     <>

@@ -1,19 +1,29 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainLayout from "./ui/MainLayout";
-import Home from "./Pages/Home";
-import Dashboard from "./Pages/Dashboard";
-import Error from "./ui/Error";
-import About, { loader as AboutLoader } from "./Pages/About";
-import Login, {
-  loader as actionLoader,
-  action as LoginForm,
-} from "./features/Auth/Login";
-import SignUp, { action as signupAction } from "./features/Auth/SignUp";
-import User, { loader as loadUser } from "./features/dashboard/User";
-import Edit, { loader as editLoader } from "./features/dashboard/Edit";
-import Payment from "./features/dashboard/Payments";
-import Subjects from "./features/dashboard/Subjects";
-import Results from "./features/dashboard/Results";
+import { Suspense, lazy } from "react";
+
+import {
+  fetchSubjects,
+  fetchUser,
+  fetchAbout,
+  checkLogin,
+  loadEditValues,
+} from "./services/loaders";
+import { validateLogin, SignupUser } from "./services/Action";
+import SpinnerFullPage from "./ui/SpinnerFullPage";
+import { Toaster } from "react-hot-toast";
+
+const MainLayout = lazy(() => import("./ui/MainLayout"));
+const Home = lazy(() => import("./Pages/Home"));
+const Dashboard = lazy(() => import("./Pages/Dashboard"));
+const Error = lazy(() => import("./ui/Error"));
+const About = lazy(() => import("./Pages/About"));
+const Login = lazy(() => import("./features/Auth/Login"));
+const SignUp = lazy(() => import("./features/Auth/SignUp"));
+const User = lazy(() => import("./features/dashboard/User"));
+const Edit = lazy(() => import("./features/dashboard/Edit"));
+const Payment = lazy(() => import("./features/dashboard/Payments"));
+const Subjects = lazy(() => import("./features/dashboard/Subjects"));
+const Results = lazy(() => import("./features/dashboard/Results"));
 
 function App() {
   const router = createBrowserRouter([
@@ -24,19 +34,19 @@ function App() {
         {
           path: "/about",
           element: <About />,
-          loader: AboutLoader,
+          loader: fetchAbout,
           errorElement: <Error />,
         },
         {
           path: "login",
           element: <Login />,
-          action: LoginForm,
-          loader: actionLoader,
+          action: validateLogin,
+          loader: checkLogin,
           errorElement: <Error />,
         },
         {
           path: "signup",
-          action: signupAction,
+          action: SignupUser,
           element: <SignUp />,
           errorElement: <Error />,
         },
@@ -44,7 +54,7 @@ function App() {
     },
 
     {
-      path: "dashBoard",
+      path: "dashboard",
       element: <Dashboard />,
       errorElement: <Error />,
       children: [
@@ -52,14 +62,14 @@ function App() {
           path: "user",
           element: <User />,
 
-          loader: loadUser,
+          loader: fetchUser,
           errorElement: <Error />,
         },
         {
           path: "edit",
           element: <Edit />,
           errorElement: <Error />,
-          loader: editLoader,
+          loader: loadEditValues,
         },
         {
           path: "payments",
@@ -75,12 +85,37 @@ function App() {
           path: "subjects",
           element: <Subjects />,
           errorElement: <Error />,
+          loader: fetchSubjects,
         },
       ],
     },
   ]);
 
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <Suspense fallback={<SpinnerFullPage />}>
+      <RouterProvider router={router}></RouterProvider>
+
+      <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{ margin: "8px" }}
+        toastOptions={{
+          success: { duration: 3000 },
+          error: {
+            duration: 5000,
+          },
+
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: `var(--white-clr-1)`,
+            color: `var(--blue-clr-2)`,
+          },
+        }}
+      />
+    </Suspense>
+  );
 }
 
 export default App;

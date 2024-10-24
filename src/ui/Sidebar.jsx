@@ -5,8 +5,10 @@ import styles from "../modules/Sidebar.module.css";
 function Sidebar() {
   return (
     <aside className={styles.aside}>
-      <Logo />
-      <Nav />
+      <div>
+        <Logo />
+        <Nav />
+      </div>
     </aside>
   );
 }

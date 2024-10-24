@@ -3,6 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userInfo: [],
   schoolInfo: [],
+  semester: {
+    session: "",
+    subjects: [],
+  },
 };
 
 const user = createSlice({
@@ -12,15 +16,19 @@ const user = createSlice({
     getUser(state, action) {
       state.userInfo = action.payload.userInfo;
       state.schoolInfo = action.payload.schoolInfo;
-      localStorage.setItem("state", JSON.stringify(action.payload));
     },
     logOut(state) {
       state.schoolInfo = [];
       state.schoolInfo = [];
-      localStorage.removeItem("state");
+      state.semester = "";
+    },
+
+    getSemester(state, { payload }) {
+      state.semester.session = payload.semester;
+      state.semester.subjects = payload.subjects;
     },
   },
 });
 
-export const { getUser, logOut } = user.actions;
+export const { getUser, logOut, getSemester } = user.actions;
 export default user.reducer;

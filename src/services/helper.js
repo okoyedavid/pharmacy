@@ -1,4 +1,7 @@
 import axios from "axios";
+import store from "../Store/Store";
+import { getUser } from "../Store/userSlice";
+import { userUrl } from "./api";
 
 export function createUser(formData) {
   const name = formData.get("name");
@@ -36,10 +39,24 @@ export function createUser(formData) {
 
 export async function AddUser(body) {
   try {
-    await axios.post("https://pharm-six.vercel.app/api/user", body);
+    await axios.post(userUrl, body);
     return true;
   } catch (error) {
     console.log(error);
+    return false;
+  }
+}
+
+export function validateUser(data, name, password) {
+  const authenticatedUser = Object.values(data.dataBase).find(
+    (user) => user.userInfo.name === name && user.userInfo.password === password
+  );
+
+  if (authenticatedUser) {
+    store.dispatch(getUser(authenticatedUser));
+    localStorage.setItem("state", JSON.stringify(authenticatedUser));
+    return true;
+  } else {
     return false;
   }
 }
