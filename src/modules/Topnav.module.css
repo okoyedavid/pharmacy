@@ -1,0 +1,57 @@
+.container {
+  grid-column: 2;
+  display: flex;
+  align-content: center;
+  padding: 20px 20px 0;
+  justify-content: flex-end;
+}
+
+.container > button {
+  width: 3rem;
+  border: none;
+}
+
+.navList {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+  align-items: center;
+  justify-self: center;
+
+  justify-content: flex-end;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.navItem svg {
+  margin-right: 8px;
+  color: var(--cta-clr-2);
+  height: clamp(1.4rem, 2vw + 1rem, 1.8rem);
+}
+
+.navItem > a {
+  text-decoration: none;
+  font-weight: 400;
+  color: var(--cta-clr-2);
+  font-size: clamp(8px, 1vw + 0.5rem, 20px);
+}
+
+.container > button {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .container {
+    justify-content: space-between;
+  }
+
+  .container > button {
+    display: block;
+  }
+}
