@@ -4,6 +4,7 @@ import Form from "../../ui/Form";
 import { useForm } from "react-hook-form";
 import { emailRegex } from "../../utils/constants";
 import useAuth from "./useAuth";
+import MiniSpinner from "../../ui/MiniSpinner";
 
 function Login() {
   const { register, formState, reset, handleSubmit } = useForm();
@@ -43,7 +44,7 @@ function Login() {
       </InputArea>
 
       <Button type={"primary"} variation={"medium"}>
-        {isLogginIn ? "creating your account....." : "Create Account"}
+        {isLogginIn ? <MiniSpinner /> : "Login"}
       </Button>
     </Form>
   );

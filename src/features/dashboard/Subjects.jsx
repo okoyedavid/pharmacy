@@ -19,7 +19,7 @@ function Subjects() {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Course Code</th>
+            <th className={styles.hide}>Course Code</th>
             <th>Course Title</th>
             <th>Units</th>
             <th>Grade</th>
@@ -28,7 +28,7 @@ function Subjects() {
         <tbody>
           {firstSemester.map((item) => (
             <tr key={item.id}>
-              <td>{item.code}</td>
+              <td className={styles.hide}>{item.code}</td>
               <td>{item.title}</td>
               <td>{item.units}</td>
               <td>{item.grade}</td>
@@ -43,7 +43,7 @@ function Subjects() {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Course Code</th>
+            <th className={styles.hide}>Course Code</th>
             <th>Course Title</th>
             <th>Units</th>
             <th>Grade</th>
@@ -52,7 +52,7 @@ function Subjects() {
         <tbody>
           {secondSemester.map((item) => (
             <tr key={item.id}>
-              <td>{item.code}</td>
+              <td className={styles.hide}>{item.code}</td>
               <td>{item.title}</td>
               <td>{item.units}</td>
               <td>{item.grade}</td>

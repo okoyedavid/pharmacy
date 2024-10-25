@@ -10,6 +10,7 @@
 .header {
   margin: 10px 0;
   color: var(--cta-clr-3);
+  font-size: clamp(16px, 2vw + 1rem, 20px);
 }
 
 .table > thead {
@@ -29,6 +30,7 @@
 .caption {
   margin-top: 0;
   margin-bottom: 10px;
+  font-size: clamp(16px, 2vw + 1rem, 20px);
 }
 
 .line {
@@ -47,4 +49,28 @@
   border-radius: 0 0 20px 20px;
   overflow: hidden;
   border-radius: 20px;
+}
+
+@media (max-width: 600px) {
+  .hide {
+    display: none;
+  }
+
+  .table > thead {
+    font-size: 1.2rem;
+  }
+
+  .table > tbody {
+    font-size: 0.75rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 12px 15px;
+  }
+
+  .caption {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
 }

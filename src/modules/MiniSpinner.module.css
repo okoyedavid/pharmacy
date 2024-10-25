@@ -1,0 +1,18 @@
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.spinnerMini {
+  width: 2rem;
+  height: 2rem;
+  border: 5px solid transparent;
+
+  border-top-color: var(--white-clr-3);
+  border-left-color: var(--white-clr-3);
+
+  border-right-color: var(--white-clr-3);
+  border-radius: 80%;
+  animation: rotate 1.5s infinite linear;
+}

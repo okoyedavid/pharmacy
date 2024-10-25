@@ -9,7 +9,7 @@ function useFetchSubjects() {
 
   const { data: subjects, isLoading: fetchingSubjects } = useQuery({
     queryKey: ["subjects"],
-    queryFn: () => fetchSubjects(level),
+    queryFn: () => fetchSubjects("500"),
   });
 
   return { subjects, fetchingSubjects };
