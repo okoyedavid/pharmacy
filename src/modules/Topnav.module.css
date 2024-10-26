@@ -2,13 +2,21 @@
   grid-column: 2;
   display: flex;
   align-content: center;
-  padding: 20px 20px 0;
+  padding: 10px;
   justify-content: flex-end;
 }
 
 .container > button {
   width: 3rem;
   border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.container > button > svg {
+  width: 100%;
+  height: 100%;
+  color: var(--cta-clr-2);
 }
 
 .navList {

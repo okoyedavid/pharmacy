@@ -13,7 +13,6 @@ function Nav() {
             <HiUser /> <span>Home</span>
           </NavLink>
         </li>
-
         <li>
           <NavLink
             className={`${styles.NavLink} ${styles.active}`}
@@ -22,25 +21,21 @@ function Nav() {
             <HiPencilAlt /> <span>Edit profile</span>
           </NavLink>
         </li>
-
         <li>
           <NavLink className={styles.NavLink} to="/dashboard/payments">
             <HiCreditCard /> <span>Fees</span>
           </NavLink>
         </li>
-
         <li>
           <NavLink className={styles.NavLink} to="/dashboard/subjects">
             <HiBookOpen /> <span>Subjects</span>
           </NavLink>
         </li>
-
         <li>
           <NavLink className={styles.NavLink} to="/dashboard/results">
             <FaChartArea /> <span>Results</span>
           </NavLink>
         </li>
-
         <li>
           <Logout styles={styles} />
         </li>
