@@ -64,3 +64,9 @@ svg {
   border-radius: 6px;
   color: black;
 }
+
+@media (max-width: 900px) {
+  .nav {
+    margin-top: 0px;
+  }
+}

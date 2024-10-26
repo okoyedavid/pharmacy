@@ -1,16 +1,13 @@
-import { HiMenu } from "react-icons/hi";
 import styles from "../modules/Topnav.module.css";
 import { GrResources } from "react-icons/gr";
 import { FaPrescription } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import SmallScreenNav from "./SmallScreenNav";
 
 function Topnav() {
   return (
     <div className={styles.container}>
-      <button>
-        <HiMenu />
-      </button>
-
+      <SmallScreenNav />
       <ul className={styles.navList}>
         <li className={styles.navItem}>
           <GrResources /> <NavLink>Resources</NavLink>

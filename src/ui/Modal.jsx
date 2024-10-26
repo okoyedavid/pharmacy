@@ -47,6 +47,16 @@ function Window({ children, name }) {
     document.body
   );
 }
+function CloseModal({ children }) {
+  const { close, modalName } = useContext(ModalContext);
+  function handleClick() {
+    close();
+    console.log("clicked", modalName);
+  }
+
+  return <span onClick={handleClick}>{children}</span>;
+}
 
 Modal.Window = Window;
 Modal.Open = OpenModal;
+Modal.Close = CloseModal;
