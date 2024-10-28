@@ -1,6 +1,6 @@
 import styles from "../modules/Navbar.module.css";
 import { NavLink, useLocation } from "react-router-dom";
-import logo from "/logo.jpg";
+import Logo from "./Logo";
 import Button from "./Button";
 import { HiMail } from "react-icons/hi";
 function Navbar() {
@@ -10,9 +10,7 @@ function Navbar() {
   return (
     <>
       <nav className={styles.nav}>
-        <NavLink to="/">
-          <img src={logo} className={styles.navImg} />
-        </NavLink>
+        <Logo logo="navLogo" />
         <ul className={styles.navList}>
           <li className={`${styles.navItem} ${styles.email}`}>
             <HiMail /> info@esut.edu.ng
