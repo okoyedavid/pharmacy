@@ -5,6 +5,7 @@ function About() {
   return (
     <div>
       <AboutHead />
+
       <FacultyList />
     </div>
   );

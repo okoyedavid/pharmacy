@@ -19,6 +19,10 @@ const Edit = lazy(() => import("./features/dashboard/Edit"));
 const Payment = lazy(() => import("./features/dashboard/Payments"));
 const Subjects = lazy(() => import("./features/dashboard/Subjects"));
 const Results = lazy(() => import("./features/dashboard/Results"));
+const Resources = lazy(() => import("./features/dashboard/Resources.jsx"));
+const HealthScribe = lazy(() =>
+  import("./features/dashboard/HealthScribe.jsx")
+);
 
 function App() {
   const queryClient = new QueryClient({
@@ -56,8 +60,14 @@ function App() {
           <Dashboard />
         </ProtectedRoutes>
       ),
+
       errorElement: <Error />,
       children: [
+        {
+          index: true,
+          element: <User />,
+          errorElement: <Error />,
+        },
         {
           path: "user",
           element: <User />,
@@ -81,6 +91,16 @@ function App() {
         {
           path: "subjects",
           element: <Subjects />,
+          errorElement: <Error />,
+        },
+        {
+          path: "resources",
+          element: <Resources />,
+          errorElement: <Error />,
+        },
+        {
+          path: "scribe",
+          element: <HealthScribe />,
           errorElement: <Error />,
         },
       ],

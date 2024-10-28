@@ -21,6 +21,12 @@
   --red-clr-2: #dc2626;
   --red-clr-3: #b91c1c;
 
+  --color-purple: #8b5cf6;
+  --color-pink: #0ea5e9;
+  --color-gray: #9ca3af;
+  --color-black: #1f2937;
+  --card-size: 20rem;
+
   --font-manrope: "Manrope", sans-serif;
   --font-ubuntu: "Ubuntu", sans-serif;
 }
@@ -42,4 +48,53 @@ input,
 textarea,
 select {
   font-size: 16px !important; /* Prevents zooming */
+}
+
+.mainlayout {
+  padding-top: 60px;
+  position: relative;
+}
+
+.carousel {
+  position: relative;
+  width: var(--card-size);
+  height: var(--card-size);
+  perspective: 500px;
+  transform-style: preserve-3d;
+}
+
+.nav {
+  color: white;
+  font-size: 5rem;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  z-index: 2;
+  cursor: pointer;
+  user-select: none;
+  background: unset;
+  border: unset;
+
+  &.left {
+    transform: translateX(-100%) translatey(-50%);
+  }
+
+  &.right {
+    right: 0;
+    transform: translateX(100%) translatey(-50%);
+  }
+}
+
+.errorContainer {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorContainer > button {
+  width: 30%;
 }

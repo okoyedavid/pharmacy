@@ -1,5 +1,5 @@
 import Faculties from "./Faculties";
-import styles from "../../modules/FacultyList.module.css";
+import styles from "../../modules/Faculties.module.css";
 import useAbout from "./useAbout";
 import SpinnerFullPage from "../../ui/SpinnerFullPage";
 
