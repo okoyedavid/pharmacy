@@ -49,6 +49,15 @@
   }
 }
 
+.image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+  border: 1px solid var(--cta-clr-1);
+}
+
 :global(.swiper-slide-active) > div {
   transform: scale(1.3) translateY(-10px);
   z-index: 100;
