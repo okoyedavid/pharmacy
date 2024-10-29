@@ -1,15 +1,14 @@
 import { Outlet } from "react-router-dom";
 import styles from "../modules/Dashboard.module.css";
 import Sidebar from "../ui/Sidebar";
-import Topnav from "../ui/Topnav";
+import DashboardNavBar from "../ui/DasboardNavBar";
 
 function Dashboard() {
   return (
-    <div className={styles.div}>
-      <Topnav />
-      <div className={styles.Sidebar}>
-        <Sidebar />
-      </div>
+    <div className={styles.dashboard}>
+      <DashboardNavBar />
+      <Sidebar />
+
       <main className={styles.main}>
         <Outlet />
       </main>

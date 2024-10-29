@@ -18,29 +18,33 @@
   align-items: center;
   gap: 1.2rem;
   text-decoration: none;
-  color: var(--cta-clr-2);
+  color: black;
   font-size: 1.2rem;
   font-weight: 500;
   padding: 0.8rem 1.7rem;
   transition: all 0.3s;
 }
 :global(.active).NavLink {
-  color: black;
+  color: var(--white-clr-1);
   background-color: var(--blue-clr-1);
   border-radius: 6px;
+
+  svg {
+    color: var(--blue-clr-3);
+  }
 }
 
 svg {
   width: 2rem;
   height: 2rem;
-  color: #111827;
+  color: var(--cta-clr-1);
   transition: all 0.3s;
 }
 
 .NavLink:hover {
   background-color: var(--blue-clr-0);
   border-radius: 6px;
-  color: black;
+  color: rgb(30, 22, 22);
 }
 
 .btn {
@@ -51,7 +55,7 @@ svg {
   align-items: center;
   gap: 1.2rem;
   text-decoration: none;
-  color: var(--cta-clr-2);
+  color: black;
   font-size: 1.2rem;
   font-weight: 500;
   padding: 0.8rem 1.7rem;
@@ -63,10 +67,4 @@ svg {
   background-color: var(--blue-clr-0);
   border-radius: 6px;
   color: black;
-}
-
-@media (max-width: 900px) {
-  .nav {
-    margin-top: 0px;
-  }
 }

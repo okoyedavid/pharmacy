@@ -1,29 +1,31 @@
-import styles from "../modules/Topnav.module.css";
 import { GrResources } from "react-icons/gr";
 import { FaPrescription } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import SmallScreenNav from "./SmallScreenNav";
+import styles from "../modules/Dashboard.module.css";
 import Modal from "./Modal";
 
-function Topnav() {
+function DashboardNavBar() {
   return (
-    <div className={styles.container}>
+    <div className={styles.navBar}>
       <Modal>
         <SmallScreenNav />
       </Modal>
 
       <ul className={styles.navList}>
         <li className={styles.navItem}>
-          <GrResources />{" "}
-          <NavLink to={"/dashboard/resources"}>Resources</NavLink>
+          <NavLink to={"/dashboard/resources"}>
+            <GrResources /> Resources
+          </NavLink>
         </li>
         <li className={styles.navItem}>
-          <FaPrescription />{" "}
-          <NavLink to={"/dashboard/scribe"}>HealthScribe</NavLink>
+          <NavLink to={"/dashboard/scribe"}>
+            <FaPrescription /> HealthScribe
+          </NavLink>
         </li>
       </ul>
     </div>
   );
 }
 
-export default Topnav;
+export default DashboardNavBar;
