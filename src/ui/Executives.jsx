@@ -17,7 +17,7 @@ function Executives() {
         centeredSlides={true}
         slidesPerView="auto"
         loop={true}
-        spaceBetween={30}
+        spaceBetween={20}
         pagination={{ clickable: true }}
         navigation={true}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -25,9 +25,11 @@ function Executives() {
       >
         {images.map((item) => (
           <SwiperSlide key={item.name} className={styles.slide}>
-            <img src={item.url} alt={item.name} className={styles.image} />
-            <h4>{item.role}</h4>
-            <h3>{item.name}</h3>
+            <div>
+              <img src={item.url} alt={item.name} className={styles.image} />
+              <h4>{item.role}</h4>
+              <h3>{item.name}</h3>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
