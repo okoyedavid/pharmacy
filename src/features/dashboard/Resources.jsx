@@ -1,7 +1,12 @@
 import Executives from "../../ui/Executives";
+import styles from "../../modules/Resources.module.css";
 
 function Resources() {
-  return <Executives />;
+  return (
+    <div className={styles.Resources}>
+      <Executives />;
+    </div>
+  );
 }
 
 export default Resources;
