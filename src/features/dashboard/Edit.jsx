@@ -3,10 +3,17 @@ import styles from "../../modules/Edit.module.css";
 import Button from "../../ui/Button";
 import InputArea from "../../ui/InputArea";
 import { emailRegex } from "../../utils/constants";
+import { GetUserInfo } from "../../hooks/getUserInfo";
 
 function Edit() {
+  const {
+    user: {
+      user_metadata: { email, level, name },
+    },
+  } = GetUserInfo();
+
   const { register, formState, handleSubmit } = useForm({
-    defaultValues: [],
+    defaultValues: { name, email, class: level },
   });
   const { errors } = formState;
 

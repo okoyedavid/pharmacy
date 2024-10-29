@@ -1,24 +1,29 @@
-.div {
+.dashboard {
+  height: 100vh;
+  width: 100%;
   display: grid;
-  grid-template-columns: 18rem 1fr;
+  position: fixed;
+  grid-template-columns: 16rem 1fr;
   grid-template-rows: 4rem 1fr;
-  min-height: 100vh;
   background-color: var(--white-clr-1);
+}
+
+.aside {
+  grid-row: -1 /1;
+  padding-top: 20px;
+  width: 100%;
   position: relative;
 }
 
-.Sidebar {
-  grid-row: -1 /1;
-}
-
 .main {
-  padding: 0 1rem;
+  height: 100%;
   margin: 0.5rem;
+  padding: 0 1rem;
+
+  border-radius: 10px;
   background-color: var(--white-clr-0);
   box-shadow: -16px 16px 14px -3px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
 
-  height: 100%;
   overflow: scroll;
 }
 
@@ -28,15 +33,66 @@
 }
 
 .main {
+  -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-.main {
-  -ms-overflow-style: none;
+.navBar {
+  grid-column: 2;
+  display: flex;
+  align-content: center;
+  justify-content: flex-end;
+}
+
+.navBar > button {
+  width: 3rem;
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.navBar > button > svg {
+  width: 100%;
+  height: 100%;
+  color: var(--cta-clr-2);
+}
+
+.navList {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+  align-items: center;
+  justify-self: center;
+  justify-content: flex-end;
+}
+
+.navItem > a {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.navItem svg {
+  margin-right: 8px;
+  color: var(--cta-clr-2);
+  height: clamp(1.4rem, 2vw + 1rem, 1.8rem);
+}
+
+.navItem > a {
+  text-decoration: none;
+  font-weight: 400;
+  color: var(--cta-clr-2);
+  font-size: clamp(8px, 1vw + 0.5rem, 20px);
+}
+
+.navBar > button {
+  display: none;
 }
 
 @media (max-width: 900px) {
-  .Sidebar {
+  .aside {
     display: none;
   }
 
@@ -45,7 +101,15 @@
     border-radius: 0;
   }
 
-  .div {
+  .dashboard {
+    display: block;
+  }
+
+  .navBar {
+    justify-content: space-between;
+  }
+
+  .navBar > button {
     display: block;
   }
 }
