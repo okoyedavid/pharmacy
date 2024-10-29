@@ -28,7 +28,12 @@
   position: absolute;
   place-items: center;
   transform: translateY(-10%);
+
   z-index: -3;
+}
+
+.background > img {
+  width: 100%;
 }
 
 .overlay {
