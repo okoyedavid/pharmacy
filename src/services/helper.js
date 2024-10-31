@@ -2,36 +2,30 @@ import toast from "react-hot-toast";
 import { supabase } from "./supabase";
 
 export async function fetchSubjects(level) {
-  try {
-    const { data: subjects, error } = await supabase
-      .from("courses")
-      .select("*")
-      .eq("level", level)
-      .order("code", { ascending: true });
+  const { data: subjects, error } = await supabase
+    .from("courses")
+    .select("*")
+    .eq("level", level)
+    .order("code", { ascending: true });
 
-    if (error) {
-      throw error;
-    }
-
-    return subjects;
-  } catch (err) {
-    console.error(err);
+  if (error) {
     toast.error("We encountered an error fetching the subjects");
+    console.error(error);
     return null;
   }
+
+  return subjects;
 }
 
-export async function loadEditValues() {
-  const state = JSON.parse(localStorage.getItem("state"));
-  const { userInfo, schoolInfo } = state;
+export async function getCurrentUserSubjects({ id, level }) {
+  const { data, error } = await supabase
+    .from("users")
+    .select(level)
+    .eq("user_id", id);
 
-  const values = {
-    name: userInfo.name,
-    email: userInfo.email,
-    password: userInfo.password,
-    class: schoolInfo.level,
-    quote: "if lovebite they bring am abeg ",
-  };
+  if (error) throw new Error("couldnt fetch subjects");
 
-  return values;
+  const [subjects] = data;
+
+  return subjects[level];
 }

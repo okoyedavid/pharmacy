@@ -1,18 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchSubjects } from "../services/helper";
-import { GetUserInfo } from "./getUserInfo";
+import { getCurrentUserSubjects } from "../services/helper";
+import { useSearchParams } from "react-router-dom";
+import { selectUser } from "../Store/userSlice";
+import { useSelector } from "react-redux";
 
 function useFetchSubjects() {
-  const { user } = GetUserInfo();
+  const user = useSelector(selectUser);
+  const { userid: id, level } = user;
 
-  const { level } = user.user_metadata;
+  const [searchParams] = useSearchParams();
+  const currentLevel = searchParams.get("level") || level;
 
-  const { data: subjects, isLoading: fetchingSubjects } = useQuery({
-    queryKey: ["subjects"],
-    queryFn: () => fetchSubjects("500"),
+  const { data, isLoading: fetchingSubjects } = useQuery({
+    queryKey: ["subjects", currentLevel],
+    queryFn: () => getCurrentUserSubjects({ id, level: currentLevel }),
   });
 
-  return { subjects, fetchingSubjects };
+  const [subjects] = data ?? [{}];
+
+  return { subjects, fetchingSubjects, id, level };
 }
 
 export default useFetchSubjects;

@@ -3,17 +3,15 @@ import styles from "../../modules/Edit.module.css";
 import Button from "../../ui/Button";
 import InputArea from "../../ui/InputArea";
 import { emailRegex } from "../../utils/constants";
-import { GetUserInfo } from "../../hooks/getUserInfo";
+import { selectUser } from "../../Store/userSlice";
+import { useSelector } from "react-redux";
 
 function Edit() {
-  const {
-    user: {
-      user_metadata: { email, level, name },
-    },
-  } = GetUserInfo();
+  const state = useSelector(selectUser);
+  const { name, email, currentLevel: level } = state.userInfo;
 
   const { register, formState, handleSubmit } = useForm({
-    defaultValues: { name, email, class: level },
+    defaultValues: { name, email, level },
   });
   const { errors } = formState;
 
@@ -38,14 +36,19 @@ function Edit() {
           />
         </InputArea>
 
-        <InputArea error={errors?.class?.message} label={"Level"}>
-          <input
-            name={"class"}
+        <InputArea error={errors?.level?.message} label={"Level"}>
+          <select
             placeholder={"which level are you in"}
-            type={"number"}
-            id="class"
-            {...register("class", { required: "This field is required" })}
-          />
+            name={"level"}
+            id="level"
+            {...register("level", { required: "This field is required" })}
+          >
+            <option value="100lvl">100lvl</option>
+            <option value="200lvl"> 200lvl</option>
+            <option value="300lvl">300lvl</option>
+            <option value="400lvl">400lvl</option>
+            <option value="500lvl">500lvl</option>
+          </select>
         </InputArea>
 
         <InputArea error={errors?.email?.message} label={"Email Address"}>

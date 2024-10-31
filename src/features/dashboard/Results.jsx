@@ -2,24 +2,28 @@ import useResults from "../../hooks/useResults";
 import Button from "../../ui/Button";
 import styles from "../../modules/Results.module.css";
 import InputArea from "../../ui/InputArea";
+import { useSearchParams } from "react-router-dom";
 
 function Results() {
-  const { updateResult, getSession, courses, getGradePoint, gpa } =
-    useResults();
+  const { updateResult, courses, getGradePoint, gpa } = useResults();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  function handleSemester({ target }) {
+    searchParams.set("semester", target.value);
+    setSearchParams(searchParams);
+    localStorage.removeItem("semester");
+  }
 
   return (
     <>
       <h1>Results</h1>
 
       <div>
-        <select
-          className={styles.select}
-          value={""}
-          onChange={(e) => getSession(e.target.value)}
-        >
+        <select className={styles.select} value={""} onChange={handleSemester}>
           <option value=""> select current semester </option>
-          <option value="first"> First Semester </option>
-          <option value="second"> Second Semester </option>
+          <option value="firstsemester"> First Semester </option>
+          <option value="secondsemester"> Second Semester </option>
         </select>
       </div>
 

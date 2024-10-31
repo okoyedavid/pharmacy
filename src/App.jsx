@@ -6,6 +6,8 @@ import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ProtectedRoutes from "./ui/ProtectedRoutes";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "./Store/Store.js";
 
 const MainLayout = lazy(() => import("./ui/MainLayout"));
 const Home = lazy(() => import("./Pages/Home"));
@@ -56,9 +58,11 @@ function App() {
     {
       path: "dashboard",
       element: (
-        <ProtectedRoutes>
-          <Dashboard />
-        </ProtectedRoutes>
+        <PersistGate loading={<SpinnerFullPage />} persistor={persistor}>
+          <ProtectedRoutes>
+            <Dashboard />
+          </ProtectedRoutes>
+        </PersistGate>
       ),
 
       errorElement: <Error />,

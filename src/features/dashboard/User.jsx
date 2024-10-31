@@ -1,10 +1,11 @@
-import { GetUserInfo } from "../../hooks/getUserInfo";
+import { useSelector } from "react-redux";
 import styles from "../../modules/User.module.css";
-import avatar from "/user_images/egemba.jpg";
+import { selectUser } from "../../Store/userSlice";
+import avatar from "/avatar.webp";
 
 function User() {
-  const data = GetUserInfo();
-  const user = data.user.user_metadata;
+  const state = useSelector(selectUser);
+  const { currentLevel, name } = state.userInfo;
 
   return (
     <>
@@ -14,8 +15,8 @@ function User() {
           <img src={avatar} className={styles.Profile_image} />
         </div>
         <div className={styles.headerText}>
-          <h1 className={styles.header}>{user?.name}</h1>
-          <h2>class: {user.level} level</h2>
+          <h1 className={styles.header}>{name}</h1>
+          <h2>class: {currentLevel} </h2>
         </div>
       </header>
       <div className={styles.division}>
@@ -24,11 +25,11 @@ function User() {
         <hr className={styles.line} />
       </div>
       <section>
-        {user?.currentGP && (
+        {/* {user?.currentGP && (
           <h4 className={styles.gradePoint}>
             Current Grade point average: {user.currentGP}
           </h4>
-        )}
+        )} */}
 
         <h3>favorite food: LoveBite</h3>
         <h3>favorite quote: if Lovebite they bring am </h3>
