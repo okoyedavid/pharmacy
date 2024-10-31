@@ -7,7 +7,7 @@ export const UserContext = createContext();
 
 function ProtectedRoutes({ children }) {
   const navigate = useNavigate();
-  const { isLoading, user, isAuthenticated } = useGetUser();
+  const { isLoading, isAuthenticated } = useGetUser();
 
   useEffect(() => {
     if (!isAuthenticated && !isLoading) navigate("/login");
@@ -15,10 +15,7 @@ function ProtectedRoutes({ children }) {
 
   if (isLoading) return <SpinnerFullPage />;
 
-  if (isAuthenticated)
-    return (
-      <UserContext.Provider value={{ user }}> {children}</UserContext.Provider>
-    );
+  if (isAuthenticated) return children;
 }
 
 export default ProtectedRoutes;

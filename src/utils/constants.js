@@ -2,6 +2,8 @@ const passwordRegex =
   /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
 const emailRegex = /\S+@\S+\.\S+/;
 
+const gradeRegex = /^[a-fA-F]+$/;
+
 const images = [
   {
     url: "https://qqhuguvunfliberzvjhy.supabase.co/storage/v1/object/public/Excos/gentility.jpg?t=2024-10-27T11%3A47%3A15.031Z",
@@ -77,4 +79,4 @@ const images = [
   },
 ];
 
-export { passwordRegex, emailRegex, images };
+export { passwordRegex, emailRegex, images, gradeRegex };

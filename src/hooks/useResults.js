@@ -1,17 +1,16 @@
-import { useDispatch } from "react-redux";
-import { getSemester } from "../Store/userSlice";
 import { supabase } from "../services/supabase";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import useFetchSubjects from "./useFetchSubjects";
+import { gradeRegex } from "../utils/constants";
+import { useSearchParams } from "react-router-dom";
 
 function useResults() {
   const [courses, setCourses] = useState([]);
   const [gpa, setGpa] = useState(null);
-  const { subjects } = useFetchSubjects();
-
-  const dispatch = useDispatch();
-  const regex = /^[a-fA-F]+$/;
+  const { subjects, id, level } = useFetchSubjects();
+  const [searchParams] = useSearchParams();
+  const semester = searchParams.get("semester") || "firstsemester";
 
   useEffect(() => {
     const storedData = localStorage.getItem("semester");
@@ -21,31 +20,54 @@ function useResults() {
     }
   }, []);
 
+  useEffect(() => {
+    function getSession() {
+      setGpa(null);
+      const filteredSubjects = subjects[semester];
+
+      setCourses(filteredSubjects);
+
+      const session = { session: semester, subjects: filteredSubjects };
+      localStorage.setItem("semester", JSON.stringify(session));
+    }
+
+    getSession();
+  }, [semester, subjects]);
+
   const updateResult = async (e) => {
+    const otherSemester =
+      semester === "firstsemester" ? "secondsemester" : "firstsemester";
     const { name, value } = e.target;
     const grade = value.toUpperCase();
 
-    console.log(name, value);
-
-    if (value && regex.test(value)) {
+    if (gradeRegex.test(value)) {
+      const newResult = courses.map((item) => {
+        if (item.code === name) return { ...item, grade };
+        return item;
+      });
       const { data, error } = await supabase
-        .from("courses")
-        .update({ grade })
-        .eq("code", name)
+        .from("users")
+        .update({
+          [level]: [
+            {
+              [semester]: newResult,
+              [otherSemester]: subjects[otherSemester],
+            },
+          ],
+        })
+        .eq("user_id", id)
         .select("*");
 
-      console.log(data);
+      if (error) throw new Error("There was an Error uploading results");
 
-      getSession(data[0].semester);
-
-      if (error) throw new Error(" failed to update the grade");
+      setCourses(data[semester]);
     } else {
-      toast.error("invalid grade must be between A and F");
+      toast.error("Grade is invalid! must be between A - F");
     }
   };
 
   function getGradePoint() {
-    const grade = courses.filter((item) => regex.test(item.grade));
+    const grade = courses.filter((item) => gradeRegex.test(item.grade));
 
     if (grade.length !== courses.length) {
       toast.error(
@@ -97,18 +119,6 @@ function useResults() {
     setGpa(totalScore / totalCredits);
   }
 
-  async function getSession(semester) {
-    setGpa(null);
-
-    const filteredSubjects = subjects.filter(
-      (item) => item.semester === semester
-    );
-    setCourses(filteredSubjects);
-
-    const session = { session: semester, subjects: filteredSubjects };
-    localStorage.setItem("semester", JSON.stringify(session));
-    dispatch(getSemester(semester));
-  }
-  return { updateResult, getSession, courses, getGradePoint, gpa };
+  return { updateResult, courses, getGradePoint, gpa };
 }
 export default useResults;
