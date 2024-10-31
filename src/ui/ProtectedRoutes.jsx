@@ -10,7 +10,9 @@ function ProtectedRoutes({ children }) {
   const { isLoading, isAuthenticated } = useGetUser();
 
   useEffect(() => {
-    if (!isAuthenticated && !isLoading) navigate("/login");
+    if (!isAuthenticated && !isLoading) {
+      navigate("/login");
+    }
   }, [isAuthenticated, navigate, isLoading]);
 
   if (isLoading) return <SpinnerFullPage />;

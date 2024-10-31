@@ -1,6 +1,6 @@
 import { images } from "../utils/constants";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 
 import styles from "../modules/Executives.module.css";
@@ -13,12 +13,11 @@ function Executives() {
       </h1>
 
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Navigation, Autoplay]}
         centeredSlides={true}
         slidesPerView="auto"
         loop={true}
         spaceBetween={20}
-        pagination={{ clickable: true }}
         navigation={true}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         className={styles.swiper}
@@ -26,6 +25,7 @@ function Executives() {
         {images.map((item) => (
           <SwiperSlide key={item.name} className={styles.slide}>
             <div>
+              {" "}
               <img src={item.url} alt={item.name} className={styles.image} />
               <h4>{item.role}</h4>
               <h3>{item.name}</h3>

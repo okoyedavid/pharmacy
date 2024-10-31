@@ -5,14 +5,11 @@ import { useForm } from "react-hook-form";
 import { emailRegex } from "../../utils/constants";
 import useAuth from "./useAuth";
 import MiniSpinner from "../../ui/MiniSpinner";
-import { createNewUSer } from "../../services/ApiAuth";
-
 function Login() {
   const { register, formState, reset, handleSubmit } = useForm();
   const { LoginUSer, isLogginIn } = useAuth();
   const { errors } = formState;
 
-  createNewUSer();
   function onSubmit(data) {
     LoginUSer(data, { onSettled: () => reset() });
   }
