@@ -23,19 +23,17 @@ export async function signupUser({ name, email, password, level }) {
   if (error) throw new Error();
 
   if (data.user?.id) {
-    createNewUSer(data.user.id);
+    createNewUser(data.user.id);
   }
   return data;
 }
 
-export async function Login({ email, password }) {
+export async function login({ email, password }) {
   let { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
-
   if (error) throw new Error(error.message);
-
   return data;
 }
 
@@ -45,7 +43,7 @@ export async function logout() {
   if (error) throw new Error(error.message);
 }
 
-export async function createNewUSer(id) {
+export async function createNewUser(id) {
   const { error } = await supabase.from("users").insert([{ user_id: id }]);
 
   if (error) throw new Error("there was a problem creating new user", error);
@@ -89,5 +87,5 @@ export async function getCurrentUser() {
     store.dispatch(setUser(currentUser));
   }
 
-  return data?.user?.role;
+  return data?.user;
 }

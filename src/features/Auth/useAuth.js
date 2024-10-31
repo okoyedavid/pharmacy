@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { signupUser, Login } from "../../services/ApiAuth";
+import { signupUser, login } from "../../services/ApiAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -25,10 +25,9 @@ function useAuth() {
   });
 
   const { mutate: LoginUSer, isLoading: isLogginIn } = useMutation({
-    mutationFn: (data) => Login(data),
-
+    mutationFn: (data) => login(data),
     onSuccess: (user) => {
-      queryClient.setQueryData(["user"], user.user);
+      queryClient.setQueryData(["user"], user?.user);
       navigate("/dashboard/user");
     },
 

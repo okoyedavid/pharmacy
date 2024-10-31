@@ -6,6 +6,7 @@
   grid-template-columns: 16rem 1fr;
   grid-template-rows: 4rem 1fr;
   background-color: var(--white-clr-1);
+  padding-bottom: 1rem;
 }
 
 .aside {
@@ -111,5 +112,11 @@
 
   .navBar > button {
     display: block;
+  }
+}
+
+@media (max-width: 450px) {
+  .main {
+    padding: 0;
   }
 }
