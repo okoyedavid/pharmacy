@@ -3,10 +3,12 @@ import styles from "../../modules/Edit.module.css";
 import Button from "../../ui/Button";
 import InputArea from "../../ui/InputArea";
 import { emailRegex } from "../../utils/constants";
-import { selectUser } from "../../Store/userSlice";
-import { useSelector } from "react-redux";
+import { selectUser, updateUserInfo } from "../../Store/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import Levels from "../../ui/levels";
 
 function Edit() {
+  const dispatch = useDispatch();
   const state = useSelector(selectUser);
   const { name, email, currentLevel: level } = state.userInfo;
 
@@ -16,9 +18,10 @@ function Edit() {
   const { errors } = formState;
 
   function onSubmit(data) {
-    console.log(data);
     const image = data.image[0];
-    console.log(image);
+    const finalData = data.image.length > 0 ? { ...data, image } : { ...data };
+
+    dispatch(updateUserInfo(finalData));
   }
 
   return (
@@ -37,18 +40,7 @@ function Edit() {
         </InputArea>
 
         <InputArea error={errors?.level?.message} label={"Level"}>
-          <select
-            placeholder={"which level are you in"}
-            name={"level"}
-            id="level"
-            {...register("level", { required: "This field is required" })}
-          >
-            <option value="100lvl">100lvl</option>
-            <option value="200lvl"> 200lvl</option>
-            <option value="300lvl">300lvl</option>
-            <option value="400lvl">400lvl</option>
-            <option value="500lvl">500lvl</option>
-          </select>
+          <Levels register={register} />
         </InputArea>
 
         <InputArea error={errors?.email?.message} label={"Email Address"}>
@@ -67,13 +59,16 @@ function Edit() {
           />
         </InputArea>
 
-        <InputArea error={errors?.password?.message} label={"Your password"}>
+        <InputArea
+          error={errors?.location?.message}
+          label={"Your current address"}
+        >
           <input
-            name={"password"}
-            placeholder={"input your password"}
+            name={"location"}
+            placeholder={"input your address"}
             type={"text"}
-            id="password"
-            {...register("password", { required: "This field is required" })}
+            id="location"
+            {...register("location", { required: "This field is required" })}
           />
         </InputArea>
 
@@ -87,10 +82,27 @@ function Edit() {
           />
         </InputArea>
 
-        <InputArea>
+        <InputArea label={"Date of birth"} error={errors?.date?.message}>
           <input
             className={styles.input}
-            label={"New profile photo"}
+            placeholder={"date of birth"}
+            id="date"
+            {...register("date", { required: "This field is required" })}
+          />
+        </InputArea>
+
+        <InputArea label={"bio"}>
+          <textarea
+            name={"bio"}
+            placeholder={"tell us something about yourself"}
+            id="bio"
+            {...register("bio")}
+          />
+        </InputArea>
+
+        <InputArea label={"New profile photo"}>
+          <input
+            className={`${styles.input} ${styles.file}`}
             type={"file"}
             id="image"
             name="image"

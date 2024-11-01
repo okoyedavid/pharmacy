@@ -4,9 +4,10 @@
   display: grid;
   position: fixed;
   grid-template-columns: 16rem 1fr;
-  grid-template-rows: 4rem 1fr;
+  grid-template-rows: 3rem 1fr;
   background-color: var(--white-clr-1);
   padding-bottom: 1rem;
+  overflow: scroll;
 }
 
 .aside {
@@ -18,9 +19,8 @@
 
 .main {
   height: 100%;
-  margin: 0.5rem;
-  padding: 0 1rem;
-
+  margin: 0.2rem;
+  margin-top: 0;
   border-radius: 10px;
   background-color: var(--white-clr-0);
   box-shadow: -16px 16px 14px -3px rgba(0, 0, 0, 0.1);
@@ -29,11 +29,13 @@
 }
 
 /* setting the height and the overflow to scroll caused extra scrollbars so i disabled them below */
-.main::-webkit-scrollbar {
+.main::-webkit-scrollbar,
+.dashboard::-webkit-scrollbar {
   display: none; /* Hides the scrollbar */
 }
 
-.main {
+.main,
+.dashboard {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
