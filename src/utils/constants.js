@@ -79,4 +79,12 @@ const images = [
   },
 ];
 
-export { passwordRegex, emailRegex, images, gradeRegex };
+const pharmacyLevels = [
+  { class: "100lvl", title: "100 level" },
+  { class: "200lvl", title: "200 level" },
+  { class: "300lvl", title: "300 level" },
+  { class: "400lvl", title: "400 level" },
+  { class: "500lvl", title: "500 level" },
+];
+
+export { pharmacyLevels, passwordRegex, emailRegex, images, gradeRegex };

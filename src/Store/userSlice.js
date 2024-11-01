@@ -5,11 +5,18 @@ const initialState = {
   userInfo: {
     email: "",
     name: "",
+    location: "",
+    bio: "",
+    dateofbirth: "",
+    state: "",
+    quote: "",
     currentLevel: "",
+    profileImg: "",
   },
+
   semester: "",
   status: "",
-  profileImg: "",
+  positionHeld: "",
   role: "",
   level: "",
 };
@@ -24,7 +31,7 @@ const userSlice = createSlice({
       state.userInfo.name = payload.name;
       state.userInfo.currentLevel = payload.currentLevel;
       state.semester = "firstSemester";
-      state.profileImg = payload.profileImg;
+      state.userInfo.profileImg = payload.profileImg;
       state.status = payload.status;
       state.role = payload.role;
       state.level = state.userInfo.currentLevel;
@@ -33,10 +40,21 @@ const userSlice = createSlice({
     setLevel(state, { payload }) {
       state.level = payload;
     },
+
+    updateUserInfo(state, { payload }) {
+      state.userInfo.email = payload.email;
+      state.userInfo.name = payload.name;
+      state.userInfo.currentLevel = payload.level;
+      state.userInfo.quote = payload.quote;
+      state.userInfo.location = payload.location;
+      state.userInfo.bio = payload.bio;
+      state.userInfo.profileImg = payload.image || state.userInfo.profileImg;
+      state.level = state.userInfo.currentLevel;
+    },
   },
 });
 
-export const { setUser, setLevel } = userSlice.actions;
+export const { setUser, setLevel, updateUserInfo } = userSlice.actions;
 export default userSlice.reducer;
 
 export const selectIsUserAuthenticated = (state) => Boolean(state.user.userid);
