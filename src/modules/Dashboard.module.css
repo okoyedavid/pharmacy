@@ -5,7 +5,7 @@
   position: fixed;
   grid-template-columns: 16rem 1fr;
   grid-template-rows: 4rem 1fr;
-  background-color: var(--white-clr-1);
+  background-color: var(--white-clr-3);
   overflow: scroll;
 }
 
@@ -14,7 +14,7 @@
   padding-top: 20px;
   width: 100%;
   background-color: var(--white-clr-0);
-  border-right: 2px solid var(--white-clr-1);
+  border-right: 2px solid var(--white-clr-3);
   position: relative;
 }
 
@@ -45,7 +45,7 @@
   justify-content: flex-end;
 
   background-color: var(--white-clr-0);
-  border-bottom: 2px solid var(--white-clr-1);
+  border-bottom: 2px solid var(--white-clr-3);
 }
 
 .navBar > button {
@@ -116,6 +116,7 @@
   .main {
     margin: 0;
     border-radius: 0;
+    height: 100%;
   }
 
   .dashboard {

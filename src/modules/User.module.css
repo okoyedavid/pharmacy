@@ -69,7 +69,7 @@
   border: 0;
   height: 3px; /* Thin line */
   background-color: var(
-    --white-clr-1
+    --white-clr-3
   ); /* Color of the line, adjust as needed */
 }
 
