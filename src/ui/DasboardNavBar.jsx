@@ -1,6 +1,6 @@
 import { GrResources } from "react-icons/gr";
 import { FaPrescription } from "react-icons/fa";
-import { NavLink, useLocation, useNavigation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import SmallScreenNav from "./SmallScreenNav";
 import styles from "../modules/Dashboard.module.css";
 import Modal from "./Modal";
@@ -22,14 +22,14 @@ function DashboardNavBar() {
         {pathname !== "/dashboard/user" && (
           <li className={styles.user}>
             <img src={profileImg} alt="" />
-            <span>{name}</span>
+            <span>{name.split(" ")[0]}</span>
           </li>
         )}
-        <li className={styles.navItem}>
+        {/* <li className={styles.navItem}>
           <NavLink to={"/dashboard/resources"}>
             <GrResources /> Resources
           </NavLink>
-        </li>
+        </li> */}
         <li className={styles.navItem}>
           <NavLink to={"/dashboard/scribe"}>
             <FaPrescription /> HealthScribe
