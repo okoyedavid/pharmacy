@@ -4,7 +4,9 @@ import {
   selectIsUserAuthenticated,
   selectRole,
   setUser,
+  updateUserInfo,
 } from "../Store/userSlice";
+import { supabaseUrl } from "./api";
 
 export async function signupUser({ name, email, password, level }) {
   const { data, error } = await supabase.auth.signUp({
@@ -88,4 +90,69 @@ export async function getCurrentUser() {
   }
 
   return data?.user;
+}
+
+export async function updateCurrentUser({
+  name,
+  level,
+  quote,
+  date,
+  bio,
+  location,
+  image: Newimage,
+}) {
+  const image = Newimage[0];
+  const finalData = {
+    name,
+    level,
+    quote,
+    date,
+    bio,
+    location,
+  };
+
+  // Step 1: Update user metadata without avatar
+  const { data: newData, error } = await supabase.auth.updateUser({
+    data: finalData,
+  });
+  if (error) throw new Error(error.message);
+
+  // Step 2: i Check if there's an existing avatar to delete
+  const oldAvatarUrl = newData.user.user_metadata?.avatar;
+  const oldFileName = oldAvatarUrl ? oldAvatarUrl.split("/").pop() : null;
+
+  if (!Newimage.length > 0) {
+    store.dispatch(updateUserInfo(newData?.user.user_metadata));
+    return newData;
+  }
+
+  // Step 3: Upload the new image
+  const newFileName = `avatar-${newData.user.id}-${Date.now()}`;
+  const { error: storageError } = await supabase.storage
+    .from("avatars")
+    .upload(newFileName, image);
+
+  if (storageError) throw new Error(storageError.message);
+
+  const newAvatarUrl = `${supabaseUrl}/storage/v1/object/public/avatars/${newFileName}`;
+
+  // Step 4: Update user with the new avatar URL
+  const { data: updatedUser, error: updateError } =
+    await supabase.auth.updateUser({
+      data: { avatar: newAvatarUrl },
+    });
+  if (updateError) throw new Error(updateError.message);
+
+  // Step 5: If the update succeeds, delete the old avatar file if it exists
+  if (oldFileName) {
+    const { error: deleteError } = await supabase.storage
+      .from("avatars")
+      .remove([oldFileName]);
+
+    if (deleteError)
+      console.warn("Failed to delete old avatar:", deleteError.message);
+  }
+
+  store.dispatch(updateUserInfo(updatedUser?.user.user_metadata));
+  return updatedUser;
 }

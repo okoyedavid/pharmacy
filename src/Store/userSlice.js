@@ -29,6 +29,7 @@ const userSlice = createSlice({
       state.userid = payload.id;
       state.userInfo.email = payload.email;
       state.userInfo.name = payload.name;
+
       state.userInfo.currentLevel = payload.currentLevel;
       state.semester = "firstSemester";
       state.userInfo.profileImg = payload.profileImg;
@@ -42,13 +43,13 @@ const userSlice = createSlice({
     },
 
     updateUserInfo(state, { payload }) {
-      state.userInfo.email = payload.email;
       state.userInfo.name = payload.name;
       state.userInfo.currentLevel = payload.level;
       state.userInfo.quote = payload.quote;
       state.userInfo.location = payload.location;
       state.userInfo.bio = payload.bio;
-      state.userInfo.profileImg = payload.image || state.userInfo.profileImg;
+      state.userInfo.dateofbirth = payload.date;
+      state.userInfo.profileImg = payload.avatar || state.userInfo.profileImg;
       state.level = state.userInfo.currentLevel;
     },
   },
