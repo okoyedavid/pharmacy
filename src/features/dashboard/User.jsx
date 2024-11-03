@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import styles from "../../modules/User.module.css";
 import { selectUser } from "../../Store/userSlice";
-import avatar from "/user_images/jamie.jpg";
+import avatar from "/avatar.webp";
 
 function User() {
   const state = useSelector(selectUser);
@@ -13,14 +13,16 @@ function User() {
     state: stateOfOrigin,
     bio,
     age,
+    quote,
+    profileImg,
   } = state.userInfo;
-  const { status, quote } = state;
+  const { status } = state;
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <div>
-          <img src={avatar} className={styles.Profile_image} />
+          <img src={profileImg || avatar} className={styles.Profile_image} />
         </div>
 
         <div className={styles.headerText}>
@@ -31,7 +33,7 @@ function User() {
       </header>
       <div className={styles.division}>
         <hr className={styles.line} />
-        <p> {name.split(" ")[1]}</p>
+        <p> {name.split(" ")?.[1] || name.split(" ")?.[0]}</p>
         <hr className={styles.line} />
       </div>
       <section className={styles.info}>

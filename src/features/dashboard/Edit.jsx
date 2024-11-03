@@ -1,29 +1,66 @@
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import styles from "../../modules/Edit.module.css";
 import Button from "../../ui/Button";
 import InputArea from "../../ui/InputArea";
 import { emailRegex } from "../../utils/constants";
-import { selectUser, updateUserInfo } from "../../Store/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../Store/userSlice";
+import { useSelector } from "react-redux";
 import Levels from "../../ui/levels";
+import useEditUser from "../../hooks/useEditUser";
 
 function Edit() {
-  const dispatch = useDispatch();
+  const { editUser, isLoading } = useEditUser();
   const state = useSelector(selectUser);
-  const { name, email, currentLevel: level } = state.userInfo;
+  const {
+    name,
+    email,
+    currentLevel: level,
+    location,
+    quote,
+    dateofbirth: date,
+    bio,
+  } = state.userInfo;
 
-  const { register, formState, handleSubmit } = useForm({
-    defaultValues: { name, email, level },
+  const { register, formState, handleSubmit, watch } = useForm({
+    defaultValues: {
+      name,
+      email,
+      level,
+      location,
+      quote,
+      bio,
+      date,
+    },
   });
   const { errors } = formState;
 
+  // Memoize initial user data to avoid unnecessary re-renders
+  const initialValues = useMemo(
+    () => ({
+      name,
+      email,
+      level,
+      location,
+      quote,
+      bio,
+      date,
+    }),
+    [name, email, level, location, quote, bio, date]
+  );
+
+  const values = watch();
+  const hasChanged = Object.keys(initialValues).some(
+    (key) => values[key] !== initialValues[key]
+  );
+
   function onSubmit(data) {
-    const image = data.image[0];
-    const finalData = data.image.length > 0 ? { ...data, image } : { ...data };
-
-    dispatch(updateUserInfo(finalData));
+    if (hasChanged) {
+      editUser(data);
+    } else {
+      console.log("No changes made");
+    }
   }
-
   return (
     <div className={styles.edit}>
       <h2>Edit profile</h2>
@@ -48,6 +85,7 @@ function Edit() {
             name={"email"}
             type={"email"}
             id="email"
+            disabled
             placeholder={"fill in your email address"}
             {...register("email", {
               required: "This field is required",
@@ -65,6 +103,7 @@ function Edit() {
         >
           <input
             name={"location"}
+            disabled={isLoading}
             placeholder={"input your address"}
             type={"text"}
             id="location"
@@ -77,6 +116,7 @@ function Edit() {
             name={"quote"}
             placeholder={"favorite quote"}
             type={"text"}
+            disabled={isLoading}
             id="quote"
             {...register("quote")}
           />
@@ -87,6 +127,7 @@ function Edit() {
             className={styles.input}
             placeholder={"date of birth"}
             id="date"
+            disabled={isLoading}
             {...register("date", { required: "This field is required" })}
           />
         </InputArea>
@@ -94,6 +135,7 @@ function Edit() {
         <InputArea label={"bio"}>
           <textarea
             name={"bio"}
+            disabled={isLoading}
             placeholder={"tell us something about yourself"}
             id="bio"
             {...register("bio")}
@@ -106,11 +148,16 @@ function Edit() {
             type={"file"}
             id="image"
             name="image"
+            disabled={isLoading}
             {...register("image")}
           />
         </InputArea>
 
-        <Button type={"primary"} variation={"small"}>
+        <Button
+          disabled={!hasChanged || isLoading}
+          type={"primary"}
+          variation={"small"}
+        >
           Submit{" "}
         </Button>
       </form>
