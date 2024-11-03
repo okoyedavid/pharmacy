@@ -23,7 +23,7 @@ function Subjects() {
   if (fetchingSubjects) return <SpinnerFullPage />;
 
   return (
-    <>
+    <div className={styles.container}>
       <h1 className={styles.header}>Subjects currently being offered</h1>
       <div>
         <select className={styles.select} value={""} onChange={handleClick}>
@@ -80,7 +80,7 @@ function Subjects() {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
 
