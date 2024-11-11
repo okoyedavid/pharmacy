@@ -10,6 +10,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "./Store/Store.js";
 
 const MainLayout = lazy(() => import("./ui/MainLayout"));
+
+const Scribe = lazy(() => import("./Pages/Scribe"));
 const Home = lazy(() => import("./Pages/Home"));
 const Dashboard = lazy(() => import("./Pages/Dashboard"));
 const Error = lazy(() => import("./ui/Error"));
@@ -40,6 +42,11 @@ function App() {
         {
           path: "/about",
           element: <About />,
+          errorElement: <Error />,
+        },
+        {
+          path: "/scribe",
+          element: <Scribe />,
           errorElement: <Error />,
         },
         {

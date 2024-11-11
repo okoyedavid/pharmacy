@@ -2,7 +2,7 @@ import { supabase } from "../services/supabase";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import useFetchSubjects from "./useFetchSubjects";
-import { gradeRegex } from "../utils/constants";
+import { fetchConstantValue } from "../utils/constants";
 import { useSearchParams } from "react-router-dom";
 
 function useResults() {
@@ -11,7 +11,7 @@ function useResults() {
   const { subjects, id, level } = useFetchSubjects();
   const [searchParams] = useSearchParams();
   const semester = searchParams.get("semester") || "firstsemester";
-
+  const gradeRegex = fetchConstantValue("grade");
   useEffect(() => {
     const storedData = localStorage.getItem("semester");
     if (storedData) {

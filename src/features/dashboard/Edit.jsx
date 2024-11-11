@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 import styles from "../../modules/Edit.module.css";
 import Button from "../../ui/Button";
 import InputArea from "../../ui/InputArea";
-import { emailRegex } from "../../utils/constants";
+import { fetchConstantValue } from "../../utils/constants";
 import { selectUser } from "../../Store/userSlice";
 import { useSelector } from "react-redux";
 import Levels from "../../ui/levels";
 import useEditUser from "../../hooks/useEditUser";
 
 function Edit() {
+  const emailRegex = fetchConstantValue("email");
   const { editUser, isLoading } = useEditUser();
   const state = useSelector(selectUser);
   const {

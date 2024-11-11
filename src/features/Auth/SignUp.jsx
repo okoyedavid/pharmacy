@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { emailRegex, passwordRegex } from "../../utils/constants";
+import { fetchConstantValue } from "../../utils/constants";
 import Button from "../../ui/Button";
 import InputArea from "../../ui/InputArea";
 import Form from "../../ui/Form";
@@ -9,7 +9,8 @@ function SignUp() {
   const { register, handleSubmit, formState, reset } = useForm();
   const { signUp, isCreatingUSer } = useAuth();
   const { errors, isSubmitting } = formState;
-
+  const emailRegex = fetchConstantValue("email");
+  const passwordRegex = fetchConstantValue("password");
   function onSubmit(data) {
     signUp(data, { onSettled: () => reset() });
   }

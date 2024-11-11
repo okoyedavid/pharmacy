@@ -3,12 +3,16 @@ import styles from "../../modules/Subjects.module.css";
 import useFetchSubjects from "../../hooks/useFetchSubjects";
 import SpinnerFullPage from "../../ui/SpinnerFullPage";
 import { useSearchParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setLevel } from "../../Store/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, setLevel } from "../../Store/userSlice";
+import Table from "../../ui/Table";
+import Levels from "../../ui/levels";
 
 function Subjects() {
   const { subjects, fetchingSubjects } = useFetchSubjects();
+  const user = useSelector(selectUser);
   const [searchParams, setSearchParams] = useSearchParams();
+  const header = [" Course Code", " Course Title", " Units", " Grade"];
   const dispatch = useDispatch();
 
   function handleClick({ target }) {
@@ -17,69 +21,40 @@ function Subjects() {
     dispatch(setLevel(target.value));
     localStorage.removeItem("semester");
   }
-  const firstSemester = subjects.firstsemester;
-  const secondSemester = subjects.secondsemester;
+
+  const {
+    level,
+    userInfo: { currentLevel },
+  } = user;
 
   if (fetchingSubjects) return <SpinnerFullPage />;
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}>Subjects currently being offered</h1>
-      <div>
-        <select className={styles.select} value={""} onChange={handleClick}>
-          <option value=""> select current semester </option>
-          <option value="200lvl"> 200 lvl </option>
-          <option value="300lvl"> 300 lvl </option>
-          <option value="400lvl"> 400 lvl </option>
-          <option value="500lvl"> 500 lvl </option>
-        </select>
+      <div className={styles.header}>
+        {level === currentLevel ? (
+          <h1> Subjects currently being offered</h1>
+        ) : (
+          <h1> {level} subjects</h1>
+        )}
+        <Levels
+          className={styles.select}
+          value={level}
+          onChange={handleClick}
+        />
       </div>
 
-      <h2 className={styles.caption}>First Semester</h2>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th className={styles.hide}>Course Code</th>
-            <th>Course Title</th>
-            <th>Units</th>
-            <th>Grade</th>
-          </tr>
-        </thead>
-        <tbody>
-          {firstSemester.map((item) => (
-            <tr key={item.id}>
-              <td className={styles.hide}>{item.code}</td>
-              <td>{item.title}</td>
-              <td>{item.units}</td>
-              <td>{item.grade}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table session={"First"}>
+        <Table.Head array={header} />
 
-      <hr className={styles.line} />
+        <Table.Body semester={subjects.firstsemester} />
+      </Table>
 
-      <h2 className={styles.caption}>Second Semester</h2>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th className={styles.hide}>Course Code</th>
-            <th>Course Title</th>
-            <th>Units</th>
-            <th>Grade</th>
-          </tr>
-        </thead>
-        <tbody>
-          {secondSemester.map((item) => (
-            <tr key={item.id}>
-              <td className={styles.hide}>{item.code}</td>
-              <td>{item.title}</td>
-              <td>{item.units}</td>
-              <td>{item.grade}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table session={"Second"}>
+        <Table.Head array={header} />
+
+        <Table.Body semester={subjects.secondsemester} />
+      </Table>
     </div>
   );
 }

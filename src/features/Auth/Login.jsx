@@ -2,7 +2,7 @@ import Button from "../../ui/Button";
 import InputArea from "../../ui/InputArea";
 import Form from "../../ui/Form";
 import { useForm } from "react-hook-form";
-import { emailRegex } from "../../utils/constants";
+import { fetchConstantValue } from "../../utils/constants";
 import useAuth from "./useAuth";
 import MiniSpinner from "../../ui/MiniSpinner";
 function Login() {
@@ -14,6 +14,7 @@ function Login() {
     LoginUSer(data, { onSettled: () => reset() });
   }
 
+  const emailRegex = fetchConstantValue("email");
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <InputArea label={"Email"} error={errors?.email?.message}>

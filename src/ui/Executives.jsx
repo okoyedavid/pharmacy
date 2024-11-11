@@ -1,4 +1,4 @@
-import { images } from "../utils/constants";
+import { fetchConstantValue } from "../utils/constants";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
@@ -6,6 +6,7 @@ import "swiper/swiper-bundle.css";
 import styles from "../modules/Executives.module.css";
 
 function Executives() {
+  const images = fetchConstantValue("images");
   return (
     <main className={styles.container}>
       <h1 className={styles.heading}>

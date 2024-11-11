@@ -3,6 +3,7 @@ import Button from "../../ui/Button";
 import styles from "../../modules/Results.module.css";
 import InputArea from "../../ui/InputArea";
 import { useSearchParams } from "react-router-dom";
+import Table from "../../ui/Table";
 
 function Results() {
   const { updateResult, courses, getGradePoint, gpa } = useResults();
@@ -16,29 +17,23 @@ function Results() {
   }
 
   return (
-    <>
-      <h1>Results</h1>
+    <div className={styles.results}>
+      <section className={styles.header}>
+        <h1>Results</h1>
 
-      <div>
         <select className={styles.select} value={""} onChange={handleSemester}>
           <option value=""> select current semester </option>
           <option value="firstsemester"> First Semester </option>
           <option value="secondsemester"> Second Semester </option>
         </select>
-      </div>
+      </section>
 
       <div>
         {courses?.length > 0 && (
           <>
-            <table>
-              <thead>
-                <tr>
-                  <th>Course</th>
-                  <th>Code</th>
-                  <th>Grade</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table session={"First "}>
+              <Table.Head type="results" array={["Course", "Code", "Grade"]} />
+              <Table.Body type="result">
                 {courses.map((item) => (
                   <tr key={item.id}>
                     <td>{item.title}</td>
@@ -54,8 +49,8 @@ function Results() {
                     </td>
                   </tr>
                 ))}
-              </tbody>
-            </table>
+              </Table.Body>
+            </Table>
 
             {gpa && (
               <p>
@@ -74,7 +69,7 @@ function Results() {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

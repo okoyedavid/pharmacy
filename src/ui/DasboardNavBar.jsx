@@ -1,15 +1,23 @@
-import { GrResources } from "react-icons/gr";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaPrescription } from "react-icons/fa";
-import { NavLink, useLocation } from "react-router-dom";
-import SmallScreenNav from "./SmallScreenNav";
-import styles from "../modules/Dashboard.module.css";
-import Modal from "./Modal";
-import { useSelector } from "react-redux";
+
 import { selectUser } from "../Store/userSlice";
+import { useSelector } from "react-redux";
+
+import styles from "../modules/Dashboard.module.css";
+import SmallScreenNav from "./SmallScreenNav";
+import avatar from "/avatar.webp";
+import Modal from "./Modal";
+import { HiArrowRightOnRectangle } from "react-icons/hi2";
 
 function DashboardNavBar() {
   const state = useSelector(selectUser);
-  const { name, profileImg } = state.userInfo;
+  const navigate = useNavigate();
+  const { profileImg } = state.userInfo;
+
+  function handleLogout() {
+    navigate("/");
+  }
 
   const { pathname } = useLocation();
   return (
@@ -19,21 +27,24 @@ function DashboardNavBar() {
       </Modal>
 
       <ul className={styles.navList}>
-        {pathname !== "/dashboard/user" && (
-          <li className={styles.user}>
-            <img src={profileImg} alt="" />
-            <span>{name.split(" ")[0]}</span>
-          </li>
-        )}
-        {/* <li className={styles.navItem}>
-          <NavLink to={"/dashboard/resources"}>
-            <GrResources /> Resources
-          </NavLink>
-        </li> */}
         <li className={styles.navItem}>
           <NavLink to={"/dashboard/scribe"}>
             <FaPrescription /> HealthScribe
           </NavLink>
+        </li>
+
+        {pathname === "/dashboard"
+          ? null
+          : pathname !== "/dashboard/user" && (
+              <li className={styles.user}>
+                <img src={profileImg || avatar} alt="profile image" />
+              </li>
+            )}
+
+        <li className={styles.navItem}>
+          <button className={styles.logout} onClick={handleLogout}>
+            <HiArrowRightOnRectangle />
+          </button>
         </li>
       </ul>
     </div>
