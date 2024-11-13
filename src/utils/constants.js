@@ -87,4 +87,42 @@ const pharmacyLevels = [
   { class: "500lvl", title: "500 level" },
 ];
 
-export { pharmacyLevels, passwordRegex, emailRegex, images, gradeRegex };
+// class might be overkill but i used it in order to learn if your not familiar with it feel free to export normally
+class GetConstants {
+  constructor(constant) {
+    this.constant = constant;
+  }
+
+  getRegexConstant() {
+    const regexMap = {
+      email: emailRegex,
+      password: passwordRegex,
+      grade: gradeRegex,
+    };
+    return regexMap[this.constant] || null;
+  }
+
+  getLevel() {
+    return pharmacyLevels;
+  }
+
+  getImages() {
+    return images;
+  }
+
+  fetchConstant() {
+    if (["email", "password", "grade"].includes(this.constant)) {
+      return this.getRegexConstant();
+    } else if (this.constant === "level") {
+      return this.getLevel();
+    } else if (this.constant === "images") {
+      return this.getImages();
+    }
+    return null; // or throw an error for unrecognized constants
+  }
+}
+
+export function fetchConstantValue(value) {
+  const constant = new GetConstants(value);
+  return constant.fetchConstant();
+}

@@ -1,10 +1,10 @@
 import styles from "../modules/Button.module.css";
 
-function Button({ children, type, variation, onClick, ...rest }) {
+function Button({ children, gradient, variation, onClick, ...rest }) {
   return (
     <button
       onClick={onClick}
-      className={`${styles[type]} ${styles[variation]} ${styles.button}`}
+      className={`${styles[gradient]} ${styles[variation]} ${styles.button}`}
       {...rest}
     >
       {children}

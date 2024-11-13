@@ -10,6 +10,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "./Store/Store.js";
 
 const MainLayout = lazy(() => import("./ui/MainLayout"));
+
+const Scribe = lazy(() => import("./Pages/Scribe"));
 const Home = lazy(() => import("./Pages/Home"));
 const Dashboard = lazy(() => import("./Pages/Dashboard"));
 const Error = lazy(() => import("./ui/Error"));
@@ -17,7 +19,7 @@ const About = lazy(() => import("./Pages/About"));
 const Login = lazy(() => import("./features/Auth/Login"));
 const SignUp = lazy(() => import("./features/Auth/SignUp"));
 const User = lazy(() => import("./features/dashboard/User"));
-const Edit = lazy(() => import("./features/dashboard/Edit"));
+const Edit = lazy(() => import("./features/dashboard/Edit/Edit.jsx"));
 const Payment = lazy(() => import("./features/dashboard/Payments"));
 const Subjects = lazy(() => import("./features/dashboard/Subjects"));
 const Results = lazy(() => import("./features/dashboard/Results"));
@@ -40,6 +42,11 @@ function App() {
         {
           path: "/about",
           element: <About />,
+          errorElement: <Error />,
+        },
+        {
+          path: "/scribe",
+          element: <Scribe />,
           errorElement: <Error />,
         },
         {

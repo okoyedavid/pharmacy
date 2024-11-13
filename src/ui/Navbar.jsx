@@ -3,6 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import Logo from "./Logo";
 import Button from "./Button";
 import { HiMail } from "react-icons/hi";
+import { FaPrescription } from "react-icons/fa";
 function Navbar() {
   const { pathname } = useLocation();
   const state = localStorage.getItem("state");
@@ -18,14 +19,16 @@ function Navbar() {
           <li className={styles.navItem}>
             <NavLink to={"/about"}>About us</NavLink>
           </li>
-          <li className={styles.navItem}>
-            <NavLink to={"/portal"}>Portal</NavLink>
-          </li>
 
+          <li className={styles.navItem}>
+            <NavLink to={"/scribe"}>
+              <FaPrescription /> HealthScribe
+            </NavLink>
+          </li>
           <li className={styles.navItem}>
             {!state ? (
               <NavLink to={pathname === "/login" ? "signup" : "login"}>
-                <Button type={"primary"} variation={"medium"}>
+                <Button gradient={"primary"} variation={"medium"}>
                   {pathname === "/login" ? "signup" : "login"}
                 </Button>
               </NavLink>

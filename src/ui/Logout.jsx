@@ -1,4 +1,4 @@
-import { HiLogout } from "react-icons/hi";
+import { HiArrowRightOnRectangle } from "react-icons/hi2";
 import Modal from "./Modal";
 import { logout as logoutApi } from "../services/ApiAuth";
 import { useNavigate } from "react-router-dom";
@@ -15,8 +15,8 @@ function Logout({ styles }) {
   return (
     <Modal>
       <Modal.Open name="logout">
-        <button className={styles.btn}>
-          <HiLogout /> <span>Logout</span>
+        <button className={styles.logout}>
+          <HiArrowRightOnRectangle />
         </button>
       </Modal.Open>
 

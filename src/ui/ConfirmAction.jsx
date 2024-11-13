@@ -24,7 +24,7 @@ function ConfirmAction({
       </div>
 
       <Button
-        type={"revert"}
+        gradient={"revert"}
         variation={"medium"}
         onClick={close}
         aria-label={`Cancel ${type}`}
@@ -32,7 +32,7 @@ function ConfirmAction({
         {cancelText || "CANCEL"}
       </Button>
       <Button
-        type={"danger"}
+        gradient={"danger"}
         onClick={onConfirm}
         aria-label={`Confirm ${type}`}
         variation={"medium"}

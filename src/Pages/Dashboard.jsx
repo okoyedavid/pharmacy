@@ -6,10 +6,9 @@ import DashboardNavBar from "../ui/DasboardNavBar";
 function Dashboard() {
   return (
     <div className={styles.dashboard}>
-      <DashboardNavBar />
       <Sidebar />
-
       <main className={styles.main}>
+        <DashboardNavBar />
         <Outlet />
       </main>
     </div>

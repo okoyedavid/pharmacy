@@ -2,43 +2,32 @@ import useResults from "../../hooks/useResults";
 import Button from "../../ui/Button";
 import styles from "../../modules/Results.module.css";
 import InputArea from "../../ui/InputArea";
-import { useSearchParams } from "react-router-dom";
+import Table from "../../ui/Table";
+import Filter from "../../ui/Filter";
 
 function Results() {
   const { updateResult, courses, getGradePoint, gpa } = useResults();
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  function handleSemester({ target }) {
-    searchParams.set("semester", target.value);
-    setSearchParams(searchParams);
-    localStorage.removeItem("semester");
-  }
-
   return (
-    <>
-      <h1>Results</h1>
+    <div className={styles.results}>
+      <section className={styles.header}>
+        <h1>Results</h1>
 
-      <div>
-        <select className={styles.select} value={""} onChange={handleSemester}>
-          <option value=""> select current semester </option>
-          <option value="firstsemester"> First Semester </option>
-          <option value="secondsemester"> Second Semester </option>
-        </select>
-      </div>
+        <Filter
+          filterField="semester"
+          options={[
+            { value: "firstsemester", label: "First Semester" },
+            { value: "secondsemester", label: " Second Semester" },
+          ]}
+        />
+      </section>
 
       <div>
         {courses?.length > 0 && (
           <>
-            <table>
-              <thead>
-                <tr>
-                  <th>Course</th>
-                  <th>Code</th>
-                  <th>Grade</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table session={"First "}>
+              <Table.Head type="results" array={["Course", "Code", "Grade"]} />
+              <Table.Body type="result">
                 {courses.map((item) => (
                   <tr key={item.id}>
                     <td>{item.title}</td>
@@ -54,8 +43,8 @@ function Results() {
                     </td>
                   </tr>
                 ))}
-              </tbody>
-            </table>
+              </Table.Body>
+            </Table>
 
             {gpa && (
               <p>
@@ -66,7 +55,7 @@ function Results() {
               <Button
                 onClick={getGradePoint}
                 variation={"medium"}
-                type={"primary"}
+                gradient={"primary"}
               >
                 calculate Grade point
               </Button>
@@ -74,7 +63,7 @@ function Results() {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

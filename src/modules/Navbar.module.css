@@ -44,10 +44,18 @@
 .navItem > button > a {
   text-decoration: none;
   color: var(--blue-clr-1);
+  display: flex;
+  align-items: center;
 }
 
 .navItem > button > a {
   color: var(--white-clr-2);
+}
+
+.navItem svg {
+  margin-right: 8px;
+  color: var(--cta-clr-2);
+  height: clamp(1.4rem, 2vw + 1rem, 1.8rem);
 }
 
 @media (max-width: 450px) {
