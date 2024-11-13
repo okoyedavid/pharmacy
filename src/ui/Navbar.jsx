@@ -28,7 +28,7 @@ function Navbar() {
           <li className={styles.navItem}>
             {!state ? (
               <NavLink to={pathname === "/login" ? "signup" : "login"}>
-                <Button type={"primary"} variation={"medium"}>
+                <Button gradient={"primary"} variation={"medium"}>
                   {pathname === "/login" ? "signup" : "login"}
                 </Button>
               </NavLink>

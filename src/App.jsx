@@ -19,7 +19,7 @@ const About = lazy(() => import("./Pages/About"));
 const Login = lazy(() => import("./features/Auth/Login"));
 const SignUp = lazy(() => import("./features/Auth/SignUp"));
 const User = lazy(() => import("./features/dashboard/User"));
-const Edit = lazy(() => import("./features/dashboard/Edit"));
+const Edit = lazy(() => import("./features/dashboard/Edit/Edit.jsx"));
 const Payment = lazy(() => import("./features/dashboard/Payments"));
 const Subjects = lazy(() => import("./features/dashboard/Subjects"));
 const Results = lazy(() => import("./features/dashboard/Results"));

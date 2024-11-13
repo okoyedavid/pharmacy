@@ -43,7 +43,7 @@ function Login() {
         />
       </InputArea>
 
-      <Button type={"primary"} variation={"medium"}>
+      <Button gradient={"primary"} variation={"medium"}>
         {isLogginIn ? <MiniSpinner /> : "Login"}
       </Button>
     </Form>

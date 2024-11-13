@@ -70,7 +70,7 @@ function SignUp() {
       </InputArea>
 
       <Button
-        type={"primary"}
+        gradient={"primary"}
         variation={"medium"}
         disabled={isCreatingUSer || isSubmitting}
       >

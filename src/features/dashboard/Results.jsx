@@ -2,30 +2,24 @@ import useResults from "../../hooks/useResults";
 import Button from "../../ui/Button";
 import styles from "../../modules/Results.module.css";
 import InputArea from "../../ui/InputArea";
-import { useSearchParams } from "react-router-dom";
 import Table from "../../ui/Table";
+import Filter from "../../ui/Filter";
 
 function Results() {
   const { updateResult, courses, getGradePoint, gpa } = useResults();
-
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  function handleSemester({ target }) {
-    searchParams.set("semester", target.value);
-    setSearchParams(searchParams);
-    localStorage.removeItem("semester");
-  }
 
   return (
     <div className={styles.results}>
       <section className={styles.header}>
         <h1>Results</h1>
 
-        <select className={styles.select} value={""} onChange={handleSemester}>
-          <option value=""> select current semester </option>
-          <option value="firstsemester"> First Semester </option>
-          <option value="secondsemester"> Second Semester </option>
-        </select>
+        <Filter
+          filterField="semester"
+          options={[
+            { value: "firstsemester", label: "First Semester" },
+            { value: "secondsemester", label: " Second Semester" },
+          ]}
+        />
       </section>
 
       <div>
@@ -61,7 +55,7 @@ function Results() {
               <Button
                 onClick={getGradePoint}
                 variation={"medium"}
-                type={"primary"}
+                gradient={"primary"}
               >
                 calculate Grade point
               </Button>

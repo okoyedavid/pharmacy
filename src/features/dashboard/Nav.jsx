@@ -2,7 +2,6 @@ import { HiBookOpen, HiCreditCard, HiPencilAlt, HiUser } from "react-icons/hi";
 import styles from "../../modules/Nav.module.css";
 import { NavLink } from "react-router-dom";
 import { FaChartArea } from "react-icons/fa";
-import Logout from "../../ui/Logout";
 
 function Nav() {
   return (
@@ -35,9 +34,6 @@ function Nav() {
           <NavLink className={styles.NavLink} to="/dashboard/results">
             <FaChartArea /> <span>Results</span>
           </NavLink>
-        </li>
-        <li>
-          <Logout styles={styles} />
         </li>
       </ul>
     </nav>

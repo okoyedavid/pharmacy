@@ -1,4 +1,4 @@
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FaPrescription } from "react-icons/fa";
 
 import { selectUser } from "../Store/userSlice";
@@ -8,16 +8,11 @@ import styles from "../modules/Dashboard.module.css";
 import SmallScreenNav from "./SmallScreenNav";
 import avatar from "/avatar.webp";
 import Modal from "./Modal";
-import { HiArrowRightOnRectangle } from "react-icons/hi2";
+import Logout from "./Logout";
 
 function DashboardNavBar() {
   const state = useSelector(selectUser);
-  const navigate = useNavigate();
   const { profileImg } = state.userInfo;
-
-  function handleLogout() {
-    navigate("/");
-  }
 
   const { pathname } = useLocation();
   return (
@@ -42,9 +37,7 @@ function DashboardNavBar() {
             )}
 
         <li className={styles.navItem}>
-          <button className={styles.logout} onClick={handleLogout}>
-            <HiArrowRightOnRectangle />
-          </button>
+          <Logout styles={styles} />
         </li>
       </ul>
     </div>
