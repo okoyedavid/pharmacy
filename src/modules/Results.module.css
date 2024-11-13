@@ -20,3 +20,9 @@
     margin: 0;
   }
 }
+
+@media (max-width: 500px) {
+  .results {
+    padding: 1rem 0.5rem;
+  }
+}
