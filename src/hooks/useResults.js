@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import useFetchSubjects from "./useFetchSubjects";
 import { fetchConstantValue } from "../utils/constants";
 import { useSearchParams } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function useResults() {
   const [courses, setCourses] = useState([]);
@@ -12,6 +13,7 @@ function useResults() {
   const [searchParams] = useSearchParams();
   const semester = searchParams.get("semester") || "firstsemester";
   const gradeRegex = fetchConstantValue("grade");
+  const query = useQueryClient();
   useEffect(() => {
     const storedData = localStorage.getItem("semester");
     if (storedData) {
@@ -56,11 +58,11 @@ function useResults() {
           ],
         })
         .eq("user_id", id)
-        .select("*");
+        .select(level);
 
       if (error) throw new Error("There was an Error uploading results");
 
-      setCourses(data[semester]);
+      return data;
     } else {
       toast.error("Grade is invalid! must be between A - F");
     }
@@ -119,6 +121,16 @@ function useResults() {
     setGpa(totalScore / totalCredits);
   }
 
-  return { updateResult, courses, getGradePoint, gpa };
+  const { mutate: updateGrade, isLoading } = useMutation({
+    mutationFn: updateResult,
+    onSuccess: () => {
+      query.invalidateQueries("subjects");
+    },
+    onError: () => {
+      toast.error("There was an Error uploading results");
+    },
+  });
+
+  return { updateGrade, isLoading, courses, getGradePoint, gpa };
 }
 export default useResults;

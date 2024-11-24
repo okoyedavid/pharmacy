@@ -6,7 +6,7 @@ import Table from "../../ui/Table";
 import Filter from "../../ui/Filter";
 
 function Results() {
-  const { updateResult, courses, getGradePoint, gpa } = useResults();
+  const { updateGrade, courses, isLoading, getGradePoint, gpa } = useResults();
 
   return (
     <div className={styles.results}>
@@ -35,8 +35,9 @@ function Results() {
                     <td>
                       <InputArea>
                         <input
+                          disabled={isLoading}
                           name={item.code}
-                          onBlur={updateResult}
+                          onBlur={updateGrade}
                           defaultValue={item.grade.toUpperCase()}
                         />
                       </InputArea>

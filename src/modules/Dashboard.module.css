@@ -15,6 +15,7 @@
   width: 100vw;
   display: grid;
   position: fixed;
+  max-width: 1400px;
   grid-template-columns: 16rem 1fr;
   overflow: scroll;
 }
@@ -85,12 +86,6 @@
   align-items: center;
   gap: 0.7rem;
 }
-.user > img {
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--cta-clr-2);
-  border-radius: 50%;
-}
 
 .navBar > button {
   display: none;
@@ -99,13 +94,11 @@
 .logout {
   all: unset;
 
-
-  svg{
+  svg {
     margin: 0;
     padding: 0;
   }
 }
-
 
 .aside {
   padding-top: 20px;

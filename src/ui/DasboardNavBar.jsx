@@ -1,19 +1,13 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { FaPrescription } from "react-icons/fa";
 
-import { selectUser } from "../Store/userSlice";
-import { useSelector } from "react-redux";
-
 import styles from "../modules/Dashboard.module.css";
 import SmallScreenNav from "./SmallScreenNav";
-import avatar from "/avatar.webp";
 import Modal from "./Modal";
 import Logout from "./Logout";
+import UserImage from "./userImage";
 
 function DashboardNavBar() {
-  const state = useSelector(selectUser);
-  const { profileImg } = state.userInfo;
-
   const { pathname } = useLocation();
   return (
     <div className={styles.navBar}>
@@ -23,18 +17,14 @@ function DashboardNavBar() {
 
       <ul className={styles.navList}>
         <li className={styles.navItem}>
-          <NavLink to={"/dashboard/scribe"}>
+          <NavLink to={"/scribe"}>
             <FaPrescription /> HealthScribe
           </NavLink>
         </li>
 
         {pathname === "/dashboard"
           ? null
-          : pathname !== "/dashboard/user" && (
-              <li className={styles.user}>
-                <img src={profileImg || avatar} alt="profile image" />
-              </li>
-            )}
+          : pathname !== "/dashboard/user" && <UserImage />}
 
         <li className={styles.navItem}>
           <Logout styles={styles} />

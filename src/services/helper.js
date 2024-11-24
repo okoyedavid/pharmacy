@@ -29,3 +29,18 @@ export async function getCurrentUserSubjects({ id, level }) {
 
   return subjects[level];
 }
+
+export function calculateAge(dateofbirth) {
+  const today = new Date();
+
+  const currentYear = today.getFullYear();
+  const dob = dateofbirth.split("-")[0];
+  const currentMonth = today.getMonth();
+  const monthOfBirth = dateofbirth.split("-")[1];
+
+  const Currentage = currentYear - dob;
+
+  const age = currentMonth > monthOfBirth ? Currentage : Currentage - 1;
+
+  return age;
+}

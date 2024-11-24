@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import styles from "../../modules/User.module.css";
 import { selectUser } from "../../Store/userSlice";
 import avatar from "/avatar.webp";
+import { calculateAge } from "../../services/helper";
 
 function User() {
   const state = useSelector(selectUser);
@@ -12,11 +13,13 @@ function User() {
     location,
     state: stateOfOrigin,
     bio,
-    age,
+    dateofbirth,
     quote,
     profileImg,
   } = state.userInfo;
   const { status } = state;
+
+  const age = calculateAge(dateofbirth);
 
   return (
     <div className={styles.container}>
@@ -39,7 +42,7 @@ function User() {
       <section className={styles.info}>
         <h3>favorite quote: {quote}</h3>
         <h4>Email Address: {email}</h4>
-        <h4>Age: 22 {age}</h4>
+        <h4>Age: {age}</h4>
 
         <h4>state of origin: {stateOfOrigin} </h4>
         <h4>Location:{location}</h4>

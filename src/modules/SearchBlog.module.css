@@ -1,0 +1,10 @@
+.input {
+  width: 400px;
+  height: 40px;
+  background-clip: padding-box;
+  border: 1.5px solid var(--blue-clr-0);
+  border-radius: 4px;
+  outline: 1px solid var(--blue-clr-0);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-family: var(--font-ubuntu);
+}

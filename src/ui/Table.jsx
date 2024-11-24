@@ -4,7 +4,7 @@ const TableContext = createContext();
 
 function Table({ children, session }) {
   return (
-    <TableContext.Provider>
+    <TableContext.Provider value={{}}>
       <h2 className={styles.caption}> {session} Semester</h2>
       <table className={styles.table}>{children}</table>{" "}
       {session?.toLowerCase() === "first" ? (
@@ -20,7 +20,7 @@ function Body({ semester, children, type = "subjects" }) {
   if (type === "subjects")
     return (
       <tbody>
-        {semester.map((item) => (
+        {semester?.map((item) => (
           <tr key={item.id}>
             <td className={styles.hide}>{item.code}</td>
             <td>{item.title}</td>

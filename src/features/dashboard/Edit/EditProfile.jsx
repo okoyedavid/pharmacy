@@ -140,7 +140,7 @@ function EditProfile({ userInfo }) {
 
       <div className={styles.ctaContainer}>
         <Button gradient={"revert"} type="reset" variation={"medium"}>
-          Reset{" "}
+          Cancel{" "}
         </Button>
         <Button
           disabled={!hasChanged || isLoading}
