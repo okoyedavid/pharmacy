@@ -7,7 +7,7 @@ import { FaPrescription } from "react-icons/fa";
 
 import { selectIsUserAuthenticated, selectRole } from "../Store/userSlice";
 import { useSelector } from "react-redux";
-import UserImage from "./userImage";
+
 import SearchBlog from "./SearchBlog";
 import { GiNewspaper } from "react-icons/gi";
 function Navbar() {
@@ -53,7 +53,7 @@ function Navbar() {
 
           <li className={styles.navItem}>
             {loggedIN ? (
-              <UserImage />
+             <div></div>
             ) : (
               <NavLink to={pathname === "/login" ? "signup" : "login"}>
                 <Button gradient={"primary"} variation={"medium"}>
