@@ -137,4 +137,8 @@
     grid-column: -1/1 !important ;
     width: 100%;
   }
+
+  .edit {
+    padding: 0;
+  }
 }

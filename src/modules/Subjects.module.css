@@ -46,7 +46,7 @@
 .caption {
   margin-top: 0;
   margin-bottom: 10px;
-  font-size: clamp(16px, 2vw + 1rem, 20px);
+  font-size: clamp(0.8rem, 1vw + 1rem, 20px);
 }
 
 .line {

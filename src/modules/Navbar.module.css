@@ -1,6 +1,4 @@
 .nav {
-  position: fixed;
-  top: 0;
   width: 100%;
   display: flex;
   z-index: 3;
@@ -8,6 +6,8 @@
   background-color: var(--white-clr-1);
   justify-content: space-between;
   padding: 10px;
+  position: sticky;
+  top: 0;
 }
 
 .navImg {
@@ -22,7 +22,7 @@
   margin: 0;
   padding: 0;
   align-items: center;
-  width: 70%;
+  width: 80%;
   list-style: none;
   justify-content: space-between;
   font-weight: 900;
@@ -66,4 +66,13 @@
   .navItem:first-child {
     display: none;
   }
+}
+
+.scribe {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-style: var(--font-ubuntu);
+  gap: 4px;
 }

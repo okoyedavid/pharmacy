@@ -10,8 +10,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "./Store/Store.js";
 
 const MainLayout = lazy(() => import("./ui/MainLayout"));
-
-const Scribe = lazy(() => import("./Pages/Scribe"));
 const Home = lazy(() => import("./Pages/Home"));
 const Dashboard = lazy(() => import("./Pages/Dashboard"));
 const Error = lazy(() => import("./ui/Error"));
@@ -24,8 +22,8 @@ const Payment = lazy(() => import("./features/dashboard/Payments"));
 const Subjects = lazy(() => import("./features/dashboard/Subjects"));
 const Results = lazy(() => import("./features/dashboard/Results"));
 const Resources = lazy(() => import("./features/dashboard/Resources.jsx"));
-const HealthScribe = lazy(() =>
-  import("./features/dashboard/HealthScribe.jsx")
+const Scribe = lazy(() =>
+  import("./features/dashboard/scribe/HealthScribe.jsx")
 );
 
 function App() {
@@ -107,11 +105,6 @@ function App() {
         {
           path: "resources",
           element: <Resources />,
-          errorElement: <Error />,
-        },
-        {
-          path: "scribe",
-          element: <HealthScribe />,
           errorElement: <Error />,
         },
       ],

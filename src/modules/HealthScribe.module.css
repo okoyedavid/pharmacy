@@ -1,0 +1,144 @@
+.container {
+  border-left: 1px solid var(--blue-clr-3);
+  overflow-y: scroll;
+}
+
+.container > h2 {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--blue-clr-1);
+  font-family: var(--font-ubuntu);
+}
+
+.scribe {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 10rem 1fr 17rem;
+}
+
+.links {
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 0.8rem;
+  flex-direction: column;
+
+  padding: 0.5rem;
+  margin: 0;
+  justify-content: space-evenly;
+}
+
+.navItem {
+  a {
+    text-decoration: none;
+    font-weight: 600;
+  }
+}
+
+.articeList {
+  border-left: 1px solid var(--blue-clr-3);
+  overflow-y: scroll;
+
+  h3 {
+    text-align: center;
+    margin: 0;
+  }
+}
+
+.articeList::-webkit-scrollbar {
+  display: none;
+}
+
+.articlesList {
+  list-style: none;
+  padding: 10px;
+}
+
+.articleItem {
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: 100px;
+    border: 1px solid var(--blue-clr-1);
+  }
+
+  h2 {
+    font-size: 0.8rem;
+    margin-top: 2px;
+  }
+}
+
+/*this part is the styles meant for the writer information */
+.writerImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 5px 5px 0;
+}
+
+.writerName {
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+  align-self: flex-end;
+}
+
+.time {
+  font-size: 0.5rem;
+  margin: 0;
+  padding: 0;
+  color: var(--blue-clr-1);
+}
+
+.writerInfo {
+  display: flex;
+  padding-left: 10px;
+  align-items: center;
+  align-self: flex-start;
+}
+
+/*this section is the part for the posts that is the main blog post*/
+.post {
+  padding: 1rem;
+}
+
+.blogHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blogImage {
+  max-width: 100%;
+  max-height: 500px;
+
+  margin: 0 auto;
+}
+
+.postTitle {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.blogPost {
+  line-height: 2rem;
+}
+
+/*This is for the posts list when a user first logs into the page*/
+
+.postLists {
+  list-style: none;
+
+  img {
+    width: 400px;
+    height: 300px;
+  }
+}

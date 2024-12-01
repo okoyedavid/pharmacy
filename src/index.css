@@ -21,6 +21,10 @@
   --red-clr-2: #dc2626;
   --red-clr-3: #b91c1c;
 
+  --scrollbar-bg: #fff;
+  --scrollbar-thumb: #38bdf8;
+  --scrollbar-thumb-hover: #0ea5e9;
+
   --font-manrope: "Manrope", sans-serif;
   --font-ubuntu: "Ubuntu", sans-serif;
 }
@@ -36,6 +40,9 @@
 body {
   padding: 0;
   margin: 0;
+  max-width: 1800px;
+  margin: 0 auto;
+  position: relative;
 }
 
 input,
@@ -45,7 +52,6 @@ select {
 }
 
 .mainlayout {
-  padding-top: 60px;
   position: relative;
 }
 
@@ -77,4 +83,25 @@ input:disabled {
 button:disabled:hover,
 input:disabled:hover {
   cursor: not-allowed !important; /* Forces the 'not-allowed' cursor on hover */
+}
+
+/* For Webkit browsers (Chrome, Edge, Safari, etc.) */
+::-webkit-scrollbar {
+  width: 4px; /* Scrollbar width */
+  height: 8px; /* Horizontal scrollbar height */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 4px; /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-bg);
+  border-radius: 4px; /* Optional rounded corners */
+  width: 0;
 }

@@ -56,7 +56,7 @@ function EditPassword({ email, submitForm }) {
 
       <div className={styles.ctaContainer}>
         <Button type="reset" gradient={"revert"} variation={"medium"}>
-          Reset{" "}
+          Cancel{" "}
         </Button>
         <Button
           disabled={true}
